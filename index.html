@@ -154,118 +154,9 @@
         </div>
       </div>
 
-      <!-- Power-Up Bottom Sheet Modal -->
-      <div id="powerup-overlay" onclick="closePowerUpModal()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden"></div>
-      <div id="powerup-modal" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-card rounded-t-3xl z-50 translate-y-full transition-transform duration-500 ease-out shadow-2xl">
-        <!-- Handle bar -->
-        <div class="flex justify-center pt-4 pb-2">
-          <div class="w-10 h-1 rounded-full bg-border"></div>
-        </div>
-        <!-- Header -->
-        <div class="px-5 pb-3 flex items-center justify-between border-b border-border">
-          <div>
-            <h3 class="font-extrabold text-lg">Power Up</h3>
-            <p class="text-xs text-muted-foreground mt-0.5">3 power-up diundi acak tiap ujian · sekali pakai</p>
-          </div>
-          <button onclick="closePowerUpModal()" class="w-9 h-9 rounded-xl bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors">
-            <i data-lucide="x" class="w-5 h-5"></i>
-          </button>
-        </div>
-        <!-- Power-up list -->
-        <div class="px-5 py-4 space-y-3 overflow-y-auto max-h-[70vh] pb-10">
 
-          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
-            <div class="w-12 h-12 rounded-2xl bg-warning/10 border border-warning/30 grid place-items-center shrink-0">
-              <i data-lucide="lightbulb" class="w-6 h-6 text-warning" stroke-width="2.2"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Hint</p>
-              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menampilkan petunjuk soal. Petunjuk diacak saat memulai ujian, hanya tersedia 3 hint per sesi.</p>
-            </div>
-          </div>
 
-          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
-            <div class="w-12 h-12 rounded-2xl bg-brand-blue/10 border border-brand-blue/30 grid place-items-center shrink-0">
-              <i data-lucide="target" class="w-6 h-6 text-brand-blue" stroke-width="2.2"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Fifty Fifty</p>
-              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menghilangkan 2 pilihan jawaban yang salah secara otomatis.</p>
-            </div>
-          </div>
 
-          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
-            <div class="w-12 h-12 rounded-2xl bg-success/10 border border-success/30 grid place-items-center shrink-0">
-              <i data-lucide="shield" class="w-6 h-6 text-success" stroke-width="2.2"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Shield</p>
-              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Jika salah menjawab, skor tidak akan berkurang. Perlindungan satu kali.</p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
-            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 grid place-items-center shrink-0">
-              <i data-lucide="refresh-ccw" class="w-6 h-6 text-primary" stroke-width="2.2"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Second Chance</p>
-              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Boleh mengulang 1 jawaban yang salah untuk mencoba kembali.</p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
-            <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 grid place-items-center shrink-0">
-              <i data-lucide="snowflake" class="w-6 h-6 text-sky-500" stroke-width="2.2"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Time Freeze</p>
-              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menghentikan timer selama 10 detik penuh.</p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
-            <div class="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/30 grid place-items-center shrink-0">
-              <i data-lucide="scan-search" class="w-6 h-6 text-violet-500" stroke-width="2.2"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Answer Scanner</p>
-              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menampilkan kemungkinan jawaban benar berdasarkan analisis soal.</p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
-            <div class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 grid place-items-center shrink-0">
-              <i data-lucide="fast-forward" class="w-6 h-6 text-orange-500" stroke-width="2.2"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Skip Question</p>
-              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Lewati soal yang sulit tanpa mengurangi poin sama sekali.</p>
-            </div>
-          </div>
-
-          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
-            <div class="w-12 h-12 rounded-2xl bg-xp-gold/10 border border-xp-gold/30 grid place-items-center shrink-0">
-              <i data-lucide="dice-6" class="w-6 h-6 text-xp-gold" stroke-width="2.2"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Lucky Guess</p>
-              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Jika salah, ada peluang jawaban tetap dianggap benar secara acak.</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Companion Owl Card -->
-      <div class="bg-card rounded-3xl p-5 border border-border flex items-center gap-4 shadow-sm">
-        <img src="assets/companion.png" alt="Owly" class="object-contain animate-float" style="width:72px;height:72px;" />
-        <div class="flex-1">
-          <p class="text-[10px] font-bold text-primary uppercase tracking-widest">Study Companion · Lv. 4</p>
-          <h4 class="font-extrabold">Owly the Wise</h4>
-          <p id="companion-speech" class="text-xs text-muted-foreground mt-0.5">"Yuk lanjut belajar! Kamu cuma butuh 150 XP lagi untuk level up 🚀"</p>
-        </div>
-      </div>
 
       <!-- Subjects Showcase -->
       <div class="space-y-3">
@@ -305,6 +196,109 @@
     <div id="bottomnav-placeholder"></div>
   </div>
 
+  <!-- Power-Up Bottom Sheet Modal -->
+  <div id="powerup-overlay" onclick="closePowerUpModal()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden"></div>
+  <div id="powerup-modal" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-card rounded-t-3xl z-50 translate-y-full transition-transform duration-500 ease-out shadow-2xl">
+    <!-- Handle bar -->
+    <div class="flex justify-center pt-4 pb-2">
+      <div class="w-10 h-1 rounded-full bg-border"></div>
+    </div>
+    <!-- Header -->
+    <div class="px-5 pb-3 flex items-center justify-between border-b border-border">
+      <div>
+        <h3 class="font-extrabold text-lg">Power Up</h3>
+        <p class="text-xs text-muted-foreground mt-0.5">3 power-up diundi acak tiap ujian · sekali pakai</p>
+      </div>
+      <button onclick="closePowerUpModal()" class="w-9 h-9 rounded-xl bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+    <!-- Power-up list -->
+    <div class="px-5 py-4 space-y-3 overflow-y-auto max-h-[70vh] pb-16">
+
+      <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+        <div class="w-12 h-12 rounded-2xl bg-warning/10 border border-warning/30 grid place-items-center shrink-0">
+          <i data-lucide="lightbulb" class="w-6 h-6 text-warning" stroke-width="2.2"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sm">Hint</p>
+          <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menampilkan petunjuk soal. Petunjuk diacak saat memulai ujian, hanya tersedia 3 hint per sesi.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+        <div class="w-12 h-12 rounded-2xl bg-brand-blue/10 border border-brand-blue/30 grid place-items-center shrink-0">
+          <i data-lucide="target" class="w-6 h-6 text-brand-blue" stroke-width="2.2"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sm">Fifty Fifty</p>
+          <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menghilangkan 2 pilihan jawaban yang salah secara otomatis.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+        <div class="w-12 h-12 rounded-2xl bg-success/10 border border-success/30 grid place-items-center shrink-0">
+          <i data-lucide="shield" class="w-6 h-6 text-success" stroke-width="2.2"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sm">Shield</p>
+          <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Jika salah menjawab, skor tidak akan berkurang. Perlindungan satu kali.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+        <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 grid place-items-center shrink-0">
+          <i data-lucide="refresh-ccw" class="w-6 h-6 text-primary" stroke-width="2.2"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sm">Second Chance</p>
+          <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Boleh mengulang 1 jawaban yang salah untuk mencoba kembali.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+        <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 grid place-items-center shrink-0">
+          <i data-lucide="snowflake" class="w-6 h-6 text-sky-500" stroke-width="2.2"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sm">Time Freeze</p>
+          <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menghentikan timer selama 10 detik penuh.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+        <div class="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/30 grid place-items-center shrink-0">
+          <i data-lucide="scan-search" class="w-6 h-6 text-violet-500" stroke-width="2.2"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sm">Answer Scanner</p>
+          <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menampilkan kemungkinan jawaban benar berdasarkan analisis soal.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+        <div class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 grid place-items-center shrink-0">
+          <i data-lucide="fast-forward" class="w-6 h-6 text-orange-500" stroke-width="2.2"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sm">Skip Question</p>
+          <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Lewati soal yang sulit tanpa mengurangi poin sama sekali.</p>
+        </div>
+      </div>
+
+      <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+        <div class="w-12 h-12 rounded-2xl bg-xp-gold/10 border border-xp-gold/30 grid place-items-center shrink-0">
+          <i data-lucide="dice-6" class="w-6 h-6 text-xp-gold" stroke-width="2.2"></i>
+        </div>
+        <div class="flex-1 min-w-0">
+          <p class="font-extrabold text-sm">Lucky Guess</p>
+          <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Jika salah, ada peluang jawaban tetap dianggap benar secara acak.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Shared JS -->
   <script src="js/shared.js"></script>
   <script>
@@ -322,10 +316,6 @@
       if (lvlLabel) lvlLabel.textContent = `LEVEL ${levelInfo.level}`;
       if (xpLabel)  xpLabel.textContent  = `${levelInfo.progress} / ${levelInfo.max} XP`;
       if (bar)      bar.style.width       = `${(levelInfo.progress / levelInfo.max) * 100}%`;
-
-      // Companion speech
-      const speech = document.getElementById('companion-speech');
-      if (speech) speech.textContent = `"Yuk lanjut belajar! Kamu cuma butuh ${levelInfo.max - levelInfo.progress} XP lagi untuk level up 🚀"`;
 
       // Topbar sync
       const tbXP    = document.getElementById('topbar-xp');

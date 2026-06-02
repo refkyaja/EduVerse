@@ -80,9 +80,7 @@ function injectTopBar(activePage) {
   placeholder.outerHTML = `
     <nav id="global-topbar" class="sticky top-0 z-40 bg-background/80 backdrop-blur-xl border-b border-border/60 px-4 py-3 flex items-center justify-between">
       <div class="flex items-center gap-2">
-        <div class="w-10 h-10 bg-gradient-to-br from-primary to-primary-glow rounded-xl flex items-center justify-center shadow-glow">
-          <i data-lucide="sparkles" class="w-5 h-5 text-primary-foreground" stroke-width="2.5"></i>
-        </div>
+        <img src="assets/companion.png" alt="EduQuest" class="w-9 h-9 object-contain" />
         <span class="font-extrabold text-xl tracking-tight">EduQuest</span>
       </div>
       <div class="flex items-center gap-2">
