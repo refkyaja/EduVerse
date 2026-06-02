@@ -247,11 +247,11 @@
   <script>
     const subjects = {
       pabp: { name: 'PABP', fullName: 'Pendidikan Agama & Budi Pekerti', chapters: [
-        { id: 'pabp-bab6',  label: 'Bab 6',  title: 'Mari Belajar',       soal: 5 },
-        { id: 'pabp-bab7',  label: 'Bab 7',  title: 'Mari Berlatih',     soal: 5 },
-        { id: 'pabp-bab8',  label: 'Bab 8',  title: 'Mari Mengkaji',     soal: 5 },
-        { id: 'pabp-bab9',  label: 'Bab 9',  title: 'Mari Memahami',     soal: 5 },
-        { id: 'pabp-bab10', label: 'Bab 10', title: 'Mari Mengamalkan',  soal: 5 },
+        { id: 'pabp-bab6',  label: 'Bab 6',  title: 'Mari Belajar',       soal: 10 },
+        { id: 'pabp-bab7',  label: 'Bab 7',  title: 'Mari Berlatih',     soal: 10 },
+        { id: 'pabp-bab8',  label: 'Bab 8',  title: 'Mari Mengkaji',     soal: 10 },
+        { id: 'pabp-bab9',  label: 'Bab 9',  title: 'Mari Memahami',     soal: 10 },
+        { id: 'pabp-bab10', label: 'Bab 10', title: 'Mari Mengamalkan',  soal: 10 },
       ]},
       ind: { name: 'Bahasa Indonesia', fullName: 'Bahasa Indonesia', chapters: [
         { id: 'ind-bab1', label: 'Bab 1', title: 'Teks Deskripsi',   soal: 5 },
@@ -332,12 +332,9 @@
           <div class="w-10 h-10 rounded-xl bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">${String(i + 1).padStart(2, '0')}</div>
           <div class="flex-1 min-w-0">
             <p class="font-extrabold text-sm">${ch.label}</p>
-            <p class="text-xs text-muted-foreground truncate">${ch.title}</p>
+            <p class="text-xs text-muted-foreground">${ch.soal || 5} Soal</p>
           </div>
-          <div class="text-right shrink-0">
-            <span class="text-[10px] font-bold text-muted-foreground">${ch.soal || 5} soal</span>
-            <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground block mx-auto mt-0.5"></i>
-          </div>
+          <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground shrink-0"></i>
         </a>
       `).join('');
 
