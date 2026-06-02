@@ -364,7 +364,7 @@
         // Next / Submit button
         const isLast = currentQuestionIdx === quizQuestions.length - 1;
         const nextBtnHtml = isLast
-          ? `<button onclick="openQuizReviewOverlay()" class="flex-1 h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-1.5 font-bold text-xs active:scale-95 transition-all shadow-glow shadow-emerald-500/20">
+          ? `<button onclick="submitQuizFinished()" class="flex-1 h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-1.5 font-bold text-xs active:scale-95 transition-all shadow-glow shadow-emerald-500/20">
                Selesai <i data-lucide="chevron-right" class="w-4 h-4 text-white"></i>
              </button>`
           : `<button onclick="nextQuizQuestion()" class="flex-1 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900/60 flex items-center justify-center gap-1.5 font-bold text-xs active:scale-95 transition-all hover:bg-emerald-200/80">
@@ -447,6 +447,7 @@
             earnedXp += doublePointsForQuestion[idx] ? 20 : 10;
           }
         });
+        const wrongCount = quizQuestions.length - correctCount;
         const accuracy = Math.round((correctCount / quizQuestions.length) * 100);
 
         // Update global state
@@ -455,36 +456,87 @@
         appState.correctAnswers += correctCount;
         saveState();
 
+        const labelLetters = ['A', 'B', 'C', 'D', 'E'];
+
         container.innerHTML = `
-          <div class="min-h-screen bg-gradient-to-br from-primary via-primary to-primary-glow text-primary-foreground flex flex-col justify-center items-center px-6">
-            <div class="flex-1 max-w-xs w-full py-16 flex flex-col items-center justify-center text-center animate-scale-in">
-              <i data-lucide="sparkles" class="w-16 h-16 text-xp-gold drop-shadow-lg animate-bounce"></i>
-              <h1 class="text-4xl font-extrabold italic mt-4">Selesai!</h1>
-              <p class="text-primary-foreground/80 mt-1">Hasil ujian ${meta.chapter}</p>
+          <div class="flex flex-col min-h-full">
+            <!-- Stats Card -->
+            <div class="bg-card border-b border-border px-4 pt-6 pb-4 text-center">
+              <div class="w-14 h-14 rounded-full bg-muted mx-auto flex items-center justify-center border-2 border-border">
+                <img src="assets/companion.png" alt="EduQuest" class="w-9 h-9 object-contain" />
+              </div>
+              <h1 class="text-xl font-extrabold italic mt-2">EduQuest</h1>
+              <p class="text-xs text-muted-foreground">${meta.subject} — ${meta.chapter}</p>
 
-              <div class="grid grid-cols-3 gap-3 mt-8 w-full">
-                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-                  <p class="text-white/70 text-[10px] font-extrabold uppercase tracking-widest">Benar</p>
-                  <p class="text-2xl font-extrabold italic mt-1 tabular-nums">${correctCount}/${quizQuestions.length}</p>
+              <!-- Accuracy Progress Bar -->
+              <div class="mt-4 max-w-xs mx-auto">
+                <div class="flex justify-between text-xs font-bold mb-1.5">
+                  <span class="text-muted-foreground">Akurasi</span>
+                  <span class="${accuracy >= 80 ? 'text-emerald-600 dark:text-emerald-400' : accuracy >= 50 ? 'text-amber-600 dark:text-amber-400' : 'text-danger'}">${accuracy}%</span>
                 </div>
-                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
-                  <p class="text-white/70 text-[10px] font-extrabold uppercase tracking-widest">Akurasi</p>
-                  <p class="text-2xl font-extrabold italic mt-1 tabular-nums">${accuracy}%</p>
-                </div>
-                <div class="bg-xp-gold text-dark-surface rounded-2xl p-4 text-center shadow-lg">
-                  <p class="text-dark-surface/70 text-[10px] font-extrabold uppercase tracking-widest">+XP</p>
-                  <p class="text-2xl font-extrabold italic mt-1 tabular-nums">${earnedXp}</p>
+                <div class="h-2.5 bg-muted rounded-full overflow-hidden">
+                  <div class="h-full rounded-full transition-all duration-1000 ease-out ${accuracy >= 80 ? 'bg-emerald-500' : accuracy >= 50 ? 'bg-amber-500' : 'bg-danger'}" style="width:${accuracy}%"></div>
                 </div>
               </div>
 
-              <div class="w-full mt-8 space-y-2">
-                <a href="index.html" class="block w-full bg-white text-primary font-extrabold py-4 rounded-2xl shadow-lg text-center active:scale-95 hover:bg-slate-50 transition-all">
-                  Kembali ke Beranda
+              <!-- Stats -->
+              <div class="grid grid-cols-3 gap-3 mt-4">
+                <div class="bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900/50 rounded-2xl p-3">
+                  <p class="text-2xl font-extrabold italic tabular-nums text-emerald-700 dark:text-emerald-300">${correctCount}</p>
+                  <p class="text-[10px] font-bold text-emerald-600/70 dark:text-emerald-400/70 uppercase tracking-wider">Benar</p>
+                </div>
+                <div class="bg-danger/5 border border-danger/20 rounded-2xl p-3">
+                  <p class="text-2xl font-extrabold italic tabular-nums text-danger">${wrongCount}</p>
+                  <p class="text-[10px] font-bold text-danger/70 uppercase tracking-wider">Salah</p>
+                </div>
+                <div class="bg-xp-gold/10 border border-xp-gold/30 rounded-2xl p-3">
+                  <p class="text-2xl font-extrabold italic tabular-nums text-xp-gold">+${earnedXp}</p>
+                  <p class="text-[10px] font-bold text-xp-gold/70 uppercase tracking-wider">XP</p>
+                </div>
+              </div>
+
+              <!-- Actions -->
+              <div class="flex gap-2 mt-4">
+                <a href="quiz-play.html?exam=${currentQuizId}" class="flex-1 bg-primary text-primary-foreground font-extrabold text-sm py-3 rounded-2xl shadow-glow text-center active:scale-95 transition-all">
+                  Main Lagi
                 </a>
-                <a href="leaderboard.html" class="block w-full bg-white/10 border border-white/20 text-white font-bold py-3 rounded-2xl backdrop-blur-sm text-center active:scale-95 transition-all">
-                  Lihat Leaderboard
+                <a href="quiz.html" class="flex-1 bg-card border border-border text-foreground font-bold text-sm py-3 rounded-2xl text-center active:scale-95 transition-all">
+                  Beranda
                 </a>
               </div>
+            </div>
+
+            <!-- Review All Questions -->
+            <div class="flex-1 px-4 py-5 space-y-4 overflow-y-auto">
+              <p class="text-xs font-extrabold text-muted-foreground uppercase tracking-widest">Pembahasan Soal</p>
+              ${quizQuestions.map((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns === q.correct;
+                return `
+                  <div class="bg-card border border-border rounded-2xl p-4 space-y-3 ${!isCorrect && userAns !== undefined ? 'border-danger/30' : ''}">
+                    <div class="flex items-start gap-2">
+                      <span class="w-6 h-6 rounded-lg bg-muted grid place-items-center text-[10px] font-extrabold text-muted-foreground shrink-0 mt-0.5">${idx + 1}</span>
+                      <p class="text-sm font-bold leading-snug">${q.q}</p>
+                    </div>
+                    <div class="space-y-1.5">
+                      ${q.options.map((opt, oi) => {
+                        const isUserAnswer = userAns === oi;
+                        const isCorrectAnswer = q.correct === oi;
+                        let optClass = 'bg-background border-border text-foreground';
+                        if (isCorrectAnswer) optClass = 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-400 text-emerald-800 dark:text-emerald-300';
+                        else if (isUserAnswer && !isCorrect) optClass = 'bg-danger/10 border-danger/50 text-danger';
+                        return `
+                          <div class="flex items-center gap-2 px-3 py-2 rounded-xl border text-xs font-medium ${optClass}">
+                            <span class="w-5 h-5 rounded-md bg-muted grid place-items-center text-[10px] font-bold shrink-0">${labelLetters[oi]}</span>
+                            <span>${opt}</span>
+                            ${isCorrectAnswer ? '<i data-lucide="check" class="w-3.5 h-3.5 text-emerald-500 shrink-0 ml-auto"></i>' : ''}
+                            ${isUserAnswer && !isCorrect ? '<i data-lucide="x" class="w-3.5 h-3.5 text-danger shrink-0 ml-auto"></i>' : ''}
+                          </div>`;
+                      }).join('')}
+                    </div>
+                  </div>
+                `;
+              }).join('')}
             </div>
           </div>
         `;
@@ -624,6 +676,7 @@
     }
 
     function submitQuizFinished() {
+      closeReviewModal();
       showConfirmModal({
         title: 'Kumpulkan Jawaban?',
         message: 'Pastikan semua jawaban sudah diisi. Soal yang belum dijawab akan dianggap kosong.',
