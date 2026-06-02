@@ -391,6 +391,7 @@
       lucide.createIcons();
     }
     function openPowerUpModal() {
+      document.body.style.overflow = 'hidden';
       const overlay = document.getElementById('powerup-overlay');
       const modal   = document.getElementById('powerup-modal');
       overlay.classList.remove('hidden');
@@ -404,6 +405,7 @@
     }
 
     function closePowerUpModal() {
+      document.body.style.overflow = '';
       const overlay = document.getElementById('powerup-overlay');
       const modal   = document.getElementById('powerup-modal');
       modal.style.transform = 'translateX(-50%) translateY(100%)';

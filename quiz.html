@@ -321,6 +321,7 @@
         </a>
       `).join('');
 
+      document.body.style.overflow = 'hidden';
       const overlay = document.getElementById('chapter-overlay');
       const modal   = document.getElementById('chapter-modal');
       overlay.classList.remove('hidden');
@@ -333,6 +334,7 @@
     }
 
     function closeChapterModal() {
+      document.body.style.overflow = '';
       const overlay = document.getElementById('chapter-overlay');
       const modal   = document.getElementById('chapter-modal');
       modal.style.transform = 'translateX(-50%) translateY(100%)';
