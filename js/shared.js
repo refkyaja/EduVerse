@@ -89,8 +89,8 @@ function injectTopBar(activePage) {
           <span id="topbar-xp" class="font-bold text-xs tabular-nums">${appState.xp.toLocaleString()} XP</span>
         </div>
         <img
-          src="assets/avatar.png"
-          alt="avatar"
+          src="assets/companion.png"
+          alt="EduQuest"
           loading="lazy"
           class="w-10 h-10 rounded-full bg-brand-soft outline outline-2 outline-card shadow-md object-cover cursor-pointer hover:scale-105 transition-transform"
           onclick="window.location.href='profile.html'"
