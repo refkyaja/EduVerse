@@ -838,6 +838,7 @@
       document.getElementById('materi-modal-body').innerHTML = data.content;
       const overlay = document.getElementById('materi-overlay');
       const modal   = document.getElementById('materi-modal');
+      document.body.style.overflow = 'hidden';
       overlay.classList.remove('hidden');
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
@@ -849,6 +850,7 @@
     }
 
     function closeMateriModal() {
+      document.body.style.overflow = '';
       const overlay = document.getElementById('materi-overlay');
       const modal   = document.getElementById('materi-modal');
       modal.style.transform = 'translateX(-50%) translateY(100%)';
