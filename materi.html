@@ -83,7 +83,7 @@
             <h3 class="font-extrabold">PABP</h3>
           </div>
           <div class="space-y-2 pl-1">
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+            <button onclick="openMateriModal('pabp-buku')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
               <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">01</div>
               <div class="flex-1 min-w-0">
                 <p class="font-bold text-sm">Buku Paket</p>
@@ -170,40 +170,8 @@
             <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
               <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">01</div>
               <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Kewirausahaan</p>
-                <p class="text-xs text-muted-foreground">Ringkasan · Flashcard · Quiz</p>
-              </div>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
-            </button>
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
-              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">02</div>
-              <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Produk Kreatif</p>
-                <p class="text-xs text-muted-foreground">Ringkasan · Flashcard · Quiz</p>
-              </div>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
-            </button>
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
-              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">03</div>
-              <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Strategi Pemasaran</p>
-                <p class="text-xs text-muted-foreground">Ringkasan · Flashcard · Quiz</p>
-              </div>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
-            </button>
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
-              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">04</div>
-              <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Laporan Keuangan</p>
-                <p class="text-xs text-muted-foreground">Ringkasan · Flashcard · Quiz</p>
-              </div>
-              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
-            </button>
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
-              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">05</div>
-              <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Inovasi Produk</p>
-                <p class="text-xs text-muted-foreground">Ringkasan · Flashcard · Quiz</p>
+                <p class="font-bold text-sm">Menyusul</p>
+                <p class="text-xs text-muted-foreground">Ringkasan · Materi</p>
               </div>
               <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
             </button>
@@ -351,19 +319,19 @@
     <div id="bottomnav-placeholder"></div>
   </div>
 
-  <!-- Materi Modal -->
+  <!-- Materi Modal (Draggable Bottom Sheet) -->
   <div id="materi-overlay" onclick="closeMateriModal()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden"></div>
-  <div id="materi-modal" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-card rounded-t-3xl z-50 translate-y-full transition-transform duration-500 ease-out shadow-2xl">
-    <div class="flex justify-center pt-4 pb-2">
+  <div id="materi-modal" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-card rounded-t-3xl z-50 translate-y-full shadow-2xl" style="transition:transform 0.5s cubic-bezier(0.32,0.72,0,1);">
+    <div id="materi-handle" class="flex justify-center pt-4 pb-2 cursor-grab active:cursor-grabbing touch-none select-none">
       <div class="w-10 h-1 rounded-full bg-border"></div>
     </div>
-    <div class="px-5 pb-3 flex items-center justify-between border-b border-border">
+    <div class="px-5 pb-3 flex items-center justify-between border-b border-border shrink-0">
       <h3 id="materi-modal-title" class="font-extrabold text-lg">Materi</h3>
       <button onclick="closeMateriModal()" class="w-9 h-9 rounded-xl bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
-    <div id="materi-modal-body" class="px-5 py-4 space-y-4 overflow-y-auto max-h-[75vh] pb-10 text-sm leading-relaxed">
+    <div id="materi-modal-body" class="px-5 py-4 space-y-4 overflow-y-auto pb-10 text-sm leading-relaxed" style="max-height:55vh;transition:max-height 0.4s cubic-bezier(0.32,0.72,0,1);">
     </div>
   </div>
 
@@ -849,6 +817,17 @@
   <li>Menjunjung tinggi persatuan, kesatuan, dan kerukunan di tengah keberagaman.</li>
   <li>Mematuhi hukum dan peraturan negara.</li>
 </ul>`
+      },
+      'pabp-buku': {
+        title: 'Buku Paket',
+        content: `<h4 class="font-extrabold text-base mb-2">Buku PAI Kelas XI Kurikulum Merdeka</h4>
+<p class="text-muted-foreground">Akses materi lengkap PABP (Pendidikan Agama dan Budi Pekerti) melalui Google Drive di bawah ini:</p>
+<div class="mt-4 p-4 bg-muted rounded-2xl border border-border">
+  <p class="font-bold text-sm mb-2">Link Google Drive:</p>
+  <a href="https://drive.google.com/drive/folders/1O_aNt59q1z0i-rrgfl7XdLpa35zjCHZp" target="_blank" rel="noopener noreferrer" class="text-primary underline break-all text-sm hover:text-primary/80 transition-colors">https://drive.google.com/drive/folders/1O_aNt59q1z0i-rrgfl7XdLpa35zjCHZp</a>
+  <p class="text-xs text-muted-foreground mt-2">File tersedia: Buku PAI -XI_Kurmer.pdf &amp; KUNCI JAWABAN PAI BAB 6-10.pdf</p>
+</div>
+`
       }
     };
 
@@ -865,6 +844,7 @@
           modal.style.transform = 'translateX(-50%) translateY(0)';
         });
       });
+      resetSheet();
       if (window.lucide) lucide.createIcons();
     }
 
@@ -874,6 +854,60 @@
       modal.style.transform = 'translateX(-50%) translateY(100%)';
       setTimeout(() => overlay.classList.add('hidden'), 400);
     }
+
+    /* ── Draggable bottom sheet ── */
+    const sheetHandle = document.getElementById('materi-handle');
+    const sheetBody   = document.getElementById('materi-modal-body');
+
+    const SHEET_COLLAPSED = 55; // vh
+    const SHEET_EXPANDED  = 88; // vh
+
+    let sheetDragging = false;
+    let sheetStartY   = 0;
+    let sheetStartH   = SHEET_COLLAPSED;
+
+    function resetSheet() {
+      sheetBody.style.maxHeight = SHEET_COLLAPSED + 'vh';
+      sheetBody.style.transition = 'max-height 0.4s cubic-bezier(0.32,0.72,0,1)';
+    }
+
+    function sheetDragStart(e) {
+      const modal = document.getElementById('materi-modal');
+      if (modal.style.transform.includes('translateY(100%)')) return;
+      sheetDragging = true;
+      sheetStartY = e.touches ? e.touches[0].clientY : e.clientY;
+      const cur = sheetBody.style.maxHeight;
+      sheetStartH = cur ? parseFloat(cur) : SHEET_COLLAPSED;
+      sheetBody.style.transition = 'none';
+    }
+
+    function sheetDragMove(e) {
+      if (!sheetDragging) return;
+      e.preventDefault();
+      const y = e.touches ? e.touches[0].clientY : e.clientY;
+      const delta = sheetStartY - y; // positive = dragging up
+      const newH = Math.min(SHEET_EXPANDED, Math.max(SHEET_COLLAPSED, sheetStartH + delta / window.innerHeight * 100));
+      sheetBody.style.maxHeight = newH + 'vh';
+    }
+
+    function sheetDragEnd() {
+      if (!sheetDragging) return;
+      sheetDragging = false;
+      sheetBody.style.transition = 'max-height 0.4s cubic-bezier(0.32,0.72,0,1)';
+      const cur = parseFloat(sheetBody.style.maxHeight) || SHEET_COLLAPSED;
+      if (cur >= SHEET_COLLAPSED + (SHEET_EXPANDED - SHEET_COLLAPSED) / 2) {
+        sheetBody.style.maxHeight = SHEET_EXPANDED + 'vh';
+      } else {
+        sheetBody.style.maxHeight = SHEET_COLLAPSED + 'vh';
+      }
+    }
+
+    sheetHandle.addEventListener('touchstart', sheetDragStart, { passive: false });
+    sheetHandle.addEventListener('touchmove',  sheetDragMove,  { passive: false });
+    sheetHandle.addEventListener('touchend',   sheetDragEnd);
+    sheetHandle.addEventListener('mousedown',  sheetDragStart);
+    document.addEventListener('mousemove', sheetDragMove);
+    document.addEventListener('mouseup',   sheetDragEnd);
 
     window.addEventListener('DOMContentLoaded', () => {
       bootPage('materi');
