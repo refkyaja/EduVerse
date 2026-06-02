@@ -125,26 +125,135 @@
         </div>
       </div>
 
-      <!-- Power-ups Active Grid -->
+      <!-- Power-Up Section -->
       <div class="space-y-3">
-        <h3 class="font-extrabold text-lg">Power-Up Aktif</h3>
+        <div class="flex items-center justify-between">
+          <h3 class="font-extrabold text-lg">Power Up</h3>
+          <button onclick="openPowerUpModal()" class="text-primary text-xs font-bold flex items-center gap-0.5 hover:underline">
+            Lihat Semua <i data-lucide="chevron-right" class="w-3 h-3"></i>
+          </button>
+        </div>
+        <!-- 4 preview icons (random sample) -->
         <div class="grid grid-cols-4 gap-3">
-          <a href="quiz.html" class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5 hover:border-primary/40 hover:scale-105 transition-all cursor-pointer">
+          <button onclick="openPowerUpModal()" class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5 hover:border-primary/40 hover:scale-105 transition-all">
             <i data-lucide="lightbulb" class="w-6 h-6 text-warning" stroke-width="2.2"></i>
             <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">Hint</span>
-          </a>
-          <a href="quiz.html" class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5 hover:border-primary/40 hover:scale-105 transition-all cursor-pointer">
-            <i data-lucide="shield" class="w-6 h-6 text-brand-blue" stroke-width="2.2"></i>
+          </button>
+          <button onclick="openPowerUpModal()" class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5 hover:border-primary/40 hover:scale-105 transition-all">
+            <i data-lucide="target" class="w-6 h-6 text-brand-blue" stroke-width="2.2"></i>
+            <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">50:50</span>
+          </button>
+          <button onclick="openPowerUpModal()" class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5 hover:border-primary/40 hover:scale-105 transition-all">
+            <i data-lucide="shield" class="w-6 h-6 text-success" stroke-width="2.2"></i>
             <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">Shield</span>
-          </a>
-          <a href="quiz.html" class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5 hover:border-primary/40 hover:scale-105 transition-all cursor-pointer">
+          </button>
+          <button onclick="openPowerUpModal()" class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5 hover:border-primary/40 hover:scale-105 transition-all">
             <i data-lucide="snowflake" class="w-6 h-6 text-sky-500" stroke-width="2.2"></i>
             <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">Freeze</span>
-          </a>
-          <a href="quiz.html" class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5 hover:border-primary/40 hover:scale-105 transition-all cursor-pointer">
-            <i data-lucide="zap" class="w-6 h-6 text-success" stroke-width="2.2"></i>
-            <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">Combo</span>
-          </a>
+          </button>
+        </div>
+      </div>
+
+      <!-- Power-Up Bottom Sheet Modal -->
+      <div id="powerup-overlay" onclick="closePowerUpModal()" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 hidden"></div>
+      <div id="powerup-modal" class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-card rounded-t-3xl z-50 translate-y-full transition-transform duration-500 ease-out shadow-2xl">
+        <!-- Handle bar -->
+        <div class="flex justify-center pt-4 pb-2">
+          <div class="w-10 h-1 rounded-full bg-border"></div>
+        </div>
+        <!-- Header -->
+        <div class="px-5 pb-3 flex items-center justify-between border-b border-border">
+          <div>
+            <h3 class="font-extrabold text-lg">Power Up</h3>
+            <p class="text-xs text-muted-foreground mt-0.5">3 power-up diundi acak tiap ujian · sekali pakai</p>
+          </div>
+          <button onclick="closePowerUpModal()" class="w-9 h-9 rounded-xl bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <!-- Power-up list -->
+        <div class="px-5 py-4 space-y-3 overflow-y-auto max-h-[70vh] pb-10">
+
+          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+            <div class="w-12 h-12 rounded-2xl bg-warning/10 border border-warning/30 grid place-items-center shrink-0">
+              <i data-lucide="lightbulb" class="w-6 h-6 text-warning" stroke-width="2.2"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">Hint</p>
+              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menampilkan petunjuk soal. Petunjuk diacak saat memulai ujian, hanya tersedia 3 hint per sesi.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+            <div class="w-12 h-12 rounded-2xl bg-brand-blue/10 border border-brand-blue/30 grid place-items-center shrink-0">
+              <i data-lucide="target" class="w-6 h-6 text-brand-blue" stroke-width="2.2"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">Fifty Fifty</p>
+              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menghilangkan 2 pilihan jawaban yang salah secara otomatis.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+            <div class="w-12 h-12 rounded-2xl bg-success/10 border border-success/30 grid place-items-center shrink-0">
+              <i data-lucide="shield" class="w-6 h-6 text-success" stroke-width="2.2"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">Shield</p>
+              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Jika salah menjawab, skor tidak akan berkurang. Perlindungan satu kali.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+            <div class="w-12 h-12 rounded-2xl bg-primary/10 border border-primary/30 grid place-items-center shrink-0">
+              <i data-lucide="refresh-ccw" class="w-6 h-6 text-primary" stroke-width="2.2"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">Second Chance</p>
+              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Boleh mengulang 1 jawaban yang salah untuk mencoba kembali.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+            <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 grid place-items-center shrink-0">
+              <i data-lucide="snowflake" class="w-6 h-6 text-sky-500" stroke-width="2.2"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">Time Freeze</p>
+              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menghentikan timer selama 10 detik penuh.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+            <div class="w-12 h-12 rounded-2xl bg-violet-500/10 border border-violet-500/30 grid place-items-center shrink-0">
+              <i data-lucide="scan-search" class="w-6 h-6 text-violet-500" stroke-width="2.2"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">Answer Scanner</p>
+              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Menampilkan kemungkinan jawaban benar berdasarkan analisis soal.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+            <div class="w-12 h-12 rounded-2xl bg-orange-500/10 border border-orange-500/30 grid place-items-center shrink-0">
+              <i data-lucide="fast-forward" class="w-6 h-6 text-orange-500" stroke-width="2.2"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">Skip Question</p>
+              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Lewati soal yang sulit tanpa mengurangi poin sama sekali.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 bg-background rounded-2xl border border-border">
+            <div class="w-12 h-12 rounded-2xl bg-xp-gold/10 border border-xp-gold/30 grid place-items-center shrink-0">
+              <i data-lucide="dice-6" class="w-6 h-6 text-xp-gold" stroke-width="2.2"></i>
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">Lucky Guess</p>
+              <p class="text-xs text-muted-foreground mt-0.5 leading-relaxed">Jika salah, ada peluang jawaban tetap dianggap benar secara acak.</p>
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -167,36 +276,26 @@
           </a>
         </div>
         <div class="space-y-2.5">
-          <div class="bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div class="p-4 flex gap-4 items-center">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 grid place-items-center text-white shadow-md">
-                <i data-lucide="calculator" class="w-6 h-6" stroke-width="2.2"></i>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h4 class="font-extrabold italic truncate">Matematika</h4>
-                <p class="text-xs text-muted-foreground truncate">Bab 3: Matriks &amp; Vektor</p>
-              </div>
-              <span class="text-sm font-extrabold text-primary tabular-nums">64%</span>
+          <a href="materi.html" class="bg-card border border-border rounded-2xl p-4 flex gap-4 items-center shadow-sm hover:shadow-md hover:border-primary/30 transition-all active:scale-[0.98] block">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 grid place-items-center text-white shadow-md shrink-0">
+              <i data-lucide="calculator" class="w-6 h-6" stroke-width="2.2"></i>
             </div>
-            <div class="h-1.5 w-full bg-muted">
-              <div class="h-full bg-gradient-to-r from-primary to-primary-glow transition-all duration-500" style="width:64%"></div>
+            <div class="flex-1 min-w-0">
+              <h4 class="font-extrabold italic truncate">Matematika</h4>
+              <p class="text-xs text-muted-foreground truncate">Bab 3: Matriks &amp; Vektor</p>
             </div>
-          </div>
-          <div class="bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-            <div class="p-4 flex gap-4 items-center">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 grid place-items-center text-white shadow-md">
-                <i data-lucide="atom" class="w-6 h-6" stroke-width="2.2"></i>
-              </div>
-              <div class="flex-1 min-w-0">
-                <h4 class="font-extrabold italic truncate">Biologi</h4>
-                <p class="text-xs text-muted-foreground truncate">Bab 5: Genetika</p>
-              </div>
-              <span class="text-sm font-extrabold text-primary tabular-nums">88%</span>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground shrink-0"></i>
+          </a>
+          <a href="materi.html" class="bg-card border border-border rounded-2xl p-4 flex gap-4 items-center shadow-sm hover:shadow-md hover:border-primary/30 transition-all active:scale-[0.98] block">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 grid place-items-center text-white shadow-md shrink-0">
+              <i data-lucide="atom" class="w-6 h-6" stroke-width="2.2"></i>
             </div>
-            <div class="h-1.5 w-full bg-muted">
-              <div class="h-full bg-gradient-to-r from-primary to-primary-glow transition-all duration-500" style="width:88%"></div>
+            <div class="flex-1 min-w-0">
+              <h4 class="font-extrabold italic truncate">Biologi</h4>
+              <p class="text-xs text-muted-foreground truncate">Bab 5: Genetika</p>
             </div>
-          </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground shrink-0"></i>
+          </a>
         </div>
       </div>
 
@@ -273,6 +372,25 @@
         qContainer.appendChild(el);
       });
       lucide.createIcons();
+    }
+    function openPowerUpModal() {
+      const overlay = document.getElementById('powerup-overlay');
+      const modal   = document.getElementById('powerup-modal');
+      overlay.classList.remove('hidden');
+      // Trigger transition after display
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          modal.style.transform = 'translateX(-50%) translateY(0)';
+        });
+      });
+      lucide.createIcons();
+    }
+
+    function closePowerUpModal() {
+      const overlay = document.getElementById('powerup-overlay');
+      const modal   = document.getElementById('powerup-modal');
+      modal.style.transform = 'translateX(-50%) translateY(100%)';
+      setTimeout(() => overlay.classList.add('hidden'), 400);
     }
   </script>
 </body>
