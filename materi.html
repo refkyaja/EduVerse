@@ -167,10 +167,10 @@
             <h3 class="font-extrabold">Pwp</h3>
           </div>
           <div class="space-y-2 pl-1">
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+            <button onclick="openMateriModal('pwp-laravel')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
               <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">01</div>
               <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Menyusul</p>
+                <p class="font-bold text-sm">Laravel</p>
                 <p class="text-xs text-muted-foreground">Ringkasan · Materi</p>
               </div>
               <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
@@ -844,6 +844,114 @@
   <li><strong>Badan Pemeriksa Keuangan (BPK):</strong> Memeriksa pengelolaan dan tanggung jawab keuangan negara.</li>
   <li><strong>Komisi Yudisial (KY):</strong> Menjaga dan menegakkan kehormatan, keluhuran martabat, serta perilaku hakim.</li>
 </ul>`
+      },
+      'pwp-laravel': {
+        title: 'Laravel',
+        content: `<h4 class="font-extrabold text-base mb-2">Apa itu Laravel?</h4>
+<p class="text-muted-foreground">Laravel adalah framework PHP yang dibuat oleh <strong>Taylor Otwell</strong> untuk mempermudah pengembangan aplikasi web. Sebelum ada framework, programmer membuat file manual (<code>login.php</code>, <code>simpan.php</code>, dll.) yang berantakan seiring berkembangnya aplikasi. Laravel hadir dengan struktur rapi agar kode mudah dibaca, dikembangkan, dan dipelihara. Laravel menerapkan konsep <strong>MVC (Model View Controller)</strong>.</p>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Konsep MVC 🍜</h4>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><strong>Model (Dapur):</strong> Mengurus data & berinteraksi langsung dengan database. Contoh: <code>Siswa::all();</code></li>
+  <li><strong>View (Pelayan):</strong> Menampilkan informasi kepada pengguna. Hanya mengantar data, tidak memproses. Contoh: <code>&lt;h1&gt;Data Siswa&lt;/h1&gt;</code></li>
+  <li><strong>Controller (Kasir):</strong> Penghubung antara View dan Model. Alur: User → Controller → Model → Database → Model → Controller → View → User.</li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Struktur Folder Laravel</h4>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><strong>app/</strong> — Kode utama: <code>Models/</code> dan <code>Http/Controllers/</code>.</li>
+  <li><strong>routes/web.php</strong> — Routing aplikasi.</li>
+  <li><strong>resources/views/</strong> — File tampilan (Blade).</li>
+  <li><strong>database/</strong> — Migration & seeder.</li>
+  <li><strong>public/</strong> — Folder yang diakses browser, berisi <code>index.php</code>.</li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Cara Install Laravel</h4>
+<p class="text-muted-foreground">Pastikan sudah install: <strong>PHP</strong>, <strong>Composer</strong>, <strong>MySQL</strong>. Lalu:</p>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li>Buat project: <code>composer create-project laravel/laravel sekolah</code></li>
+  <li>Masuk folder: <code>cd sekolah</code></li>
+  <li>Jalankan: <code>php artisan serve</code> → buka <code>http://127.0.0.1:8000</code></li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Konfigurasi Database (.env)</h4>
+<p class="text-muted-foreground">Edit file <code>.env</code> dan sesuaikan:</p>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><code>DB_DATABASE=sekolah</code></li>
+  <li><code>DB_USERNAME=root</code></li>
+  <li><code>DB_PASSWORD=</code> (kosong jika tidak ada password)</li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Routing</h4>
+<p class="text-muted-foreground">Routing diatur di <code>routes/web.php</code>. Contoh:</p>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li>Langsung: <code>Route::get('/halo', function () { return 'Halo Dunia'; });</code></li>
+  <li>Ke controller: <code>Route::get('/siswa', [SiswaController::class, 'index']);</code></li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Migration</h4>
+<p class="text-muted-foreground">Migration adalah blueprint/cetak biru database. Buat: <code>php artisan make:migration create_siswas_table</code>. Jalankan: <code>php artisan migrate</code>. Kolom penting:</p>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><strong>Primary Key:</strong> <code>$table->id();</code> — identitas unik tiap data.</li>
+  <li><strong>Foreign Key:</strong> <code>$table->foreignId('kelas_id')->constrained()->onDelete('cascade');</code> — penghubung antar tabel.</li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Model & Fillable</h4>
+<p class="text-muted-foreground">Buat model: <code>php artisan make:model Siswa</code>. Wajib definisikan <code>$fillable</code> untuk Mass Assignment Protection:</p>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li>Tanpa <code>$fillable</code> → error <strong>MassAssignmentException</strong>.</li>
+  <li>Contoh: <code>protected $fillable = ['nama', 'alamat', 'kelas_id'];</code></li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Resource Controller (7 Method)</h4>
+<p class="text-muted-foreground">Buat: <code>php artisan make:controller SiswaController --resource</code></p>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><strong>index()</strong> — Tampilkan semua data.</li>
+  <li><strong>create()</strong> — Tampilkan form tambah.</li>
+  <li><strong>store()</strong> — Simpan data baru.</li>
+  <li><strong>show($id)</strong> — Tampilkan detail data.</li>
+  <li><strong>edit($id)</strong> — Tampilkan form edit.</li>
+  <li><strong>update($id)</strong> — Simpan perubahan.</li>
+  <li><strong>destroy($id)</strong> — Hapus data.</li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Blade Template</h4>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li>Tampilkan variabel: <code>{{ $siswa->nama }}</code></li>
+  <li>Perulangan: <code>@foreach($siswa as $item) ... @endforeach</code></li>
+  <li>Kondisi: <code>@if($nilai >= 75) Lulus @endif</code></li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Validasi</h4>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><code>required</code> — Wajib diisi.</li>
+  <li><code>email</code> — Harus format email.</li>
+  <li><code>numeric</code> — Harus angka.</li>
+  <li><code>min:3</code> / <code>max:100</code> — Minimal/maksimal karakter.</li>
+  <li>Jika gagal → Laravel otomatis redirect ke halaman sebelumnya.</li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">CSRF Token</h4>
+<p class="text-muted-foreground">Setiap form POST wajib menggunakan <code>@csrf</code>. Tanpanya → error <strong>419 Page Expired</strong>.</p>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Relasi Eloquent</h4>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><strong>One To Many:</strong> 1 Kelas → Banyak Siswa. Kelas: <code>hasMany(Siswa::class)</code>. Siswa: <code>belongsTo(Kelas::class)</code>.</li>
+  <li><strong>Many To Many:</strong> Siswa ↔ Mapel (butuh tabel pivot <code>mapel_siswa</code>). Model: <code>belongsToMany(Mapel::class)</code>.</li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Laravel Breeze (Autentikasi)</h4>
+<p class="text-muted-foreground">Paket yang menyediakan Login, Register, Logout, Forgot Password, Middleware Auth & Dashboard secara otomatis.</p>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><code>composer require laravel/breeze --dev</code></li>
+  <li><code>php artisan breeze:install</code> (pilih <em>Blade with Alpine</em>)</li>
+  <li><code>npm install && npm run build</code></li>
+  <li><code>php artisan migrate</code></li>
+  <li>Rute tersedia: <code>/register</code>, <code>/login</code>, <code>/dashboard</code>.</li>
+</ul>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Middleware</h4>
+<p class="text-muted-foreground">Middleware adalah penjaga pintu. Halaman yang butuh login dilindungi dengan <code>->middleware('auth')</code>. Jika belum login → redirect ke halaman Login.</p>`
       },
       'pabp-buku': {
         title: 'Buku Paket',
