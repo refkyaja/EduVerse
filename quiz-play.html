@@ -407,9 +407,18 @@
     });
 
     // ─── START ───────────────────────────────────────────────────
+    function shuffleArray(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
     function startQuizPlay(examId) {
       currentQuizId      = examId;
-      quizQuestions      = ALL_EXAMS_QUESTIONS[examId] || ALL_EXAMS_QUESTIONS['mtk-matriks'];
+      quizQuestions      = shuffleArray(ALL_EXAMS_QUESTIONS[examId] || ALL_EXAMS_QUESTIONS['mtk-matriks']);
       currentQuestionIdx = 0;
       quizPhase          = 'intro';
       userAnswers        = {};
