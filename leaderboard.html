@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduQuest — Leaderboard</title>
+  <meta name="description" content="Papan peringkat EduQuest. Lihat siapa yang paling banyak mengumpulkan XP minggu ini.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            background: 'rgba(var(--background), <alpha-value>)',
+            foreground: 'rgba(var(--foreground), <alpha-value>)',
+            card: { DEFAULT: 'rgba(var(--card), <alpha-value>)', foreground: 'rgba(var(--card-foreground), <alpha-value>)' },
+            primary: { DEFAULT: 'rgba(var(--primary), <alpha-value>)', foreground: 'rgba(var(--primary-foreground), <alpha-value>)', glow: 'rgba(var(--primary-glow), <alpha-value>)' },
+            muted: { DEFAULT: 'rgba(var(--muted), <alpha-value>)', foreground: 'rgba(var(--muted-foreground), <alpha-value>)' },
+            border: 'rgba(var(--border), <alpha-value>)',
+            'brand-soft': 'rgba(var(--brand-soft), <alpha-value>)',
+            warning: 'rgba(var(--warning), <alpha-value>)',
+            'xp-gold': 'rgba(var(--xp-gold), <alpha-value>)',
+          },
+          boxShadow: { glow: '0 10px 40px -10px rgba(178, 59, 231, 0.5)' },
+          animation: { 'fade-in': 'fade-in 0.4s ease-out', 'pulse-glow': 'pulse-glow 2s ease-in-out infinite' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#f2f1f5] dark:bg-[#121016] min-h-screen flex justify-center items-start">
+
+  <div class="min-h-screen w-full max-w-md bg-background relative pb-24 shadow-2xl flex flex-col overflow-x-hidden border-x border-border/40">
+
+    <!-- TopBar -->
+    <div id="topbar-placeholder"></div>
+
+    <!-- Leaderboard View -->
+    <section class="px-4 pt-6 space-y-5 animate-fade-in flex flex-col">
+      <div>
+        <h1 class="text-2xl font-extrabold italic">Peringkat</h1>
+        <p class="text-sm text-muted-foreground mt-1">Kumpulkan XP terbanyak minggu ini.</p>
+      </div>
+
+      <!-- Scope Tabs -->
+      <div class="flex gap-1.5 p-1 bg-muted rounded-full">
+        <button onclick="setScope('Kelas')"    id="tab-Kelas"    class="leaderboard-tab flex-1 py-2 rounded-full text-xs font-extrabold transition-all text-muted-foreground">Kelas</button>
+        <button onclick="setScope('Sekolah')"  id="tab-Sekolah"  class="leaderboard-tab flex-1 py-2 rounded-full text-xs font-extrabold transition-all text-muted-foreground">Sekolah</button>
+        <button onclick="setScope('Kota')"     id="tab-Kota"     class="leaderboard-tab flex-1 py-2 rounded-full text-xs font-extrabold transition-all text-muted-foreground">Kota</button>
+        <button onclick="setScope('Nasional')" id="tab-Nasional" class="leaderboard-tab flex-1 py-2 rounded-full text-xs font-extrabold transition-all bg-card text-primary shadow-sm">Nasional</button>
+      </div>
+
+      <!-- Podium -->
+      <div id="podium-container" class="bg-gradient-to-br from-primary via-primary to-primary-glow rounded-3xl p-6 text-primary-foreground shadow-glow relative overflow-hidden">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- List ranks 4+ -->
+      <div id="leaderboard-list" class="space-y-2"></div>
+
+      <!-- Tip Banner -->
+      <div class="bg-warning/10 border border-warning/30 rounded-2xl p-4 flex gap-3 items-center">
+        <i data-lucide="medal" class="w-6 h-6 text-warning shrink-0 animate-bounce"></i>
+        <p id="leaderboard-tip" class="text-xs">
+          <span class="font-extrabold">Kamu di posisi #4!</span> Butuh <span class="font-extrabold text-warning">340 XP</span> lagi untuk masuk podium.
+        </p>
+      </div>
+    </section>
+
+    <!-- BottomNav -->
+    <div id="bottomnav-placeholder"></div>
+  </div>
+
+  <!-- Shared JS -->
+  <script src="js/shared.js"></script>
+  <script>
+    const scopesData = {
+      'Kelas': [
+        { rank:1, name:"Nadia Putri",         xp:4820, school:"SMA 1 Bandung",    you:false },
+        { rank:2, name:"Ayu Larasati",         xp:4290, school:"SMK 5 Surabaya",   you:false },
+        { rank:3, name:"Reza Hakim",           xp:4010, school:"SMA 3 Jakarta",    you:false },
+        { rank:4, name:"Budi Santoso (Kamu)",  xp:3950, school:"SMA 1 Bandung",    you:true  },
+        { rank:5, name:"Hendra Wijaya",        xp:3510, school:"SMK 4 Makassar",   you:false }
+      ],
+      'Sekolah': [
+        { rank:1, name:"Nadia Putri",         xp:4820, school:"SMA 1 Bandung",    you:false },
+        { rank:2, name:"Reza Hakim",           xp:4510, school:"SMA 3 Jakarta",    you:false },
+        { rank:3, name:"Budi Santoso (Kamu)", xp:3950, school:"SMA 1 Bandung",    you:true  },
+        { rank:4, name:"Maya Anggraini",       xp:3380, school:"SMA 6 Semarang",   you:false },
+        { rank:5, name:"Sari Indah",           xp:3240, school:"SMA 2 Medan",      you:false }
+      ],
+      'Kota': [
+        { rank:1, name:"Reza Hakim",           xp:4710, school:"SMA 3 Jakarta",    you:false },
+        { rank:2, name:"Ayu Larasati",         xp:4590, school:"SMK 5 Surabaya",   you:false },
+        { rank:3, name:"Dimas Pratama",        xp:4120, school:"SMA 8 Yogyakarta", you:false },
+        { rank:4, name:"Budi Santoso (Kamu)", xp:3950, school:"SMA 1 Bandung",    you:true  },
+        { rank:5, name:"Maya Anggraini",       xp:3380, school:"SMA 6 Semarang",   you:false }
+      ],
+      'Nasional': [
+        { rank:1, name:"Nadia Putri",         xp:4820, school:"SMA 1 Bandung",    you:false },
+        { rank:2, name:"Reza Hakim",           xp:4510, school:"SMA 3 Jakarta",    you:false },
+        { rank:3, name:"Ayu Larasati",         xp:4290, school:"SMK 5 Surabaya",   you:false },
+        { rank:4, name:"Budi Santoso (Kamu)", xp:3950, school:"SMA 1 Bandung",    you:true  },
+        { rank:5, name:"Dimas Pratama",        xp:3820, school:"SMA 8 Yogyakarta", you:false },
+        { rank:6, name:"Sari Indah",           xp:3640, school:"SMA 2 Medan",      you:false },
+        { rank:7, name:"Hendra Wijaya",        xp:3510, school:"SMK 4 Makassar",   you:false },
+        { rank:8, name:"Maya Anggraini",       xp:3380, school:"SMA 6 Semarang",   you:false }
+      ]
+    };
+
+    let currentScope = 'Nasional';
+
+    function setScope(scope) {
+      currentScope = scope;
+      document.querySelectorAll('.leaderboard-tab').forEach(btn => {
+        btn.className = btn.id === `tab-${scope}`
+          ? 'leaderboard-tab flex-1 py-2 rounded-full text-xs font-extrabold transition-all bg-card text-primary shadow-sm'
+          : 'leaderboard-tab flex-1 py-2 rounded-full text-xs font-extrabold transition-all text-muted-foreground';
+      });
+      renderLeaderboard();
+    }
+
+    function renderLeaderboard() {
+      const fullData = JSON.parse(JSON.stringify(scopesData[currentScope]));
+
+      // Update user XP from state
+      const userIdx = fullData.findIndex(p => p.you);
+      if (userIdx !== -1) fullData[userIdx].xp = appState.xp;
+
+      // Sort and reassign ranks
+      fullData.sort((a, b) => b.xp - a.xp);
+      fullData.forEach((p, i) => p.rank = i + 1);
+
+      const top3 = fullData.slice(0, 3);
+      const rest  = fullData.slice(3);
+
+      // Render podium
+      const p1 = top3[0] || { name:'-', xp:0 };
+      const p2 = top3[1] || { name:'-', xp:0 };
+      const p3 = top3[2] || { name:'-', xp:0 };
+
+      document.getElementById('podium-container').innerHTML = `
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.25),transparent_60%)]"></div>
+        <div class="relative grid grid-cols-3 gap-2 items-end">
+          <!-- Rank 2 -->
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 grid place-items-center font-extrabold text-lg">${p2.name[0]}</div>
+            <p class="text-xs font-extrabold mt-2 text-center truncate w-full">${p2.name.split(' ')[0]}</p>
+            <p class="text-[10px] font-mono opacity-80">${p2.xp.toLocaleString()}</p>
+            <div class="h-20 w-full mt-2 bg-white/15 backdrop-blur-sm rounded-t-2xl border-t-2 border-white/30 grid place-items-center font-extrabold italic text-2xl">2</div>
+          </div>
+          <!-- Rank 1 -->
+          <div class="flex flex-col items-center animate-bounce">
+            <i data-lucide="crown" class="w-6 h-6 text-xp-gold fill-xp-gold mb-1 drop-shadow"></i>
+            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border-2 border-xp-gold grid place-items-center font-extrabold text-lg">${p1.name[0]}</div>
+            <p class="text-xs font-extrabold mt-2 text-center truncate w-full">${p1.name.split(' ')[0]}</p>
+            <p class="text-[10px] font-mono opacity-80">${p1.xp.toLocaleString()}</p>
+            <div class="h-28 w-full mt-2 bg-white/15 backdrop-blur-sm rounded-t-2xl border-t-2 border-white/30 grid place-items-center font-extrabold italic text-2xl">1</div>
+          </div>
+          <!-- Rank 3 -->
+          <div class="flex flex-col items-center">
+            <div class="w-12 h-12 rounded-full bg-white/20 backdrop-blur-sm border-2 border-white/40 grid place-items-center font-extrabold text-lg">${p3.name[0]}</div>
+            <p class="text-xs font-extrabold mt-2 text-center truncate w-full">${p3.name.split(' ')[0]}</p>
+            <p class="text-[10px] font-mono opacity-80">${p3.xp.toLocaleString()}</p>
+            <div class="h-16 w-full mt-2 bg-white/15 backdrop-blur-sm rounded-t-2xl border-t-2 border-white/30 grid place-items-center font-extrabold italic text-2xl">3</div>
+          </div>
+        </div>
+      `;
+
+      // Render list (rank 4+)
+      const listEl = document.getElementById('leaderboard-list');
+      listEl.innerHTML = '';
+      rest.forEach(p => {
+        const item = document.createElement('div');
+        const isYou = p.you;
+        item.className = `flex items-center gap-3 p-3 rounded-2xl border transition-all ${isYou ? 'bg-primary/5 border-primary shadow-glow animate-pulse' : 'bg-card border-border'}`;
+        item.innerHTML = `
+          <div class="w-9 h-9 rounded-xl grid place-items-center font-extrabold text-sm ${isYou ? 'bg-primary text-primary-foreground' : 'bg-muted text-muted-foreground'}">${p.rank}</div>
+          <div class="flex-1 min-w-0">
+            <p class="font-extrabold text-sm truncate ${isYou ? 'text-primary' : ''}">${p.name}</p>
+            <p class="text-[10px] text-muted-foreground truncate">${p.school}</p>
+          </div>
+          <div class="text-right">
+            <p class="font-extrabold text-sm tabular-nums">${p.xp.toLocaleString()}</p>
+            <p class="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">XP</p>
+          </div>
+        `;
+        listEl.appendChild(item);
+      });
+
+      // Tip banner
+      const userInfo = fullData.find(p => p.you);
+      const tipEl    = document.getElementById('leaderboard-tip');
+      if (userInfo && tipEl) {
+        if (userInfo.rank <= 3) {
+          tipEl.innerHTML = `<span class="font-extrabold">Hebat! Kamu di podium #${userInfo.rank}!</span> Pertahankan posisimu dari tantangan minggu ini.`;
+        } else {
+          const diff = top3[2].xp - userInfo.xp;
+          tipEl.innerHTML = `<span class="font-extrabold">Kamu di posisi #${userInfo.rank}!</span> Butuh <span class="font-extrabold text-warning">${diff > 0 ? diff : 0} XP</span> lagi untuk masuk podium.`;
+        }
+      }
+
+      lucide.createIcons();
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      bootPage('leaderboard');
+      renderLeaderboard();
+    });
+  </script>
+</body>
+</html>

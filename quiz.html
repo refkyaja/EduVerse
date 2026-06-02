@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduQuest — Pilih Ujian</title>
+  <meta name="description" content="Pilih ujian yang ingin kamu kerjakan di EduQuest. Kerjakan soal, raih XP, dan tantang boss.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            background: 'rgba(var(--background), <alpha-value>)',
+            foreground: 'rgba(var(--foreground), <alpha-value>)',
+            card: { DEFAULT: 'rgba(var(--card), <alpha-value>)', foreground: 'rgba(var(--card-foreground), <alpha-value>)' },
+            primary: { DEFAULT: 'rgba(var(--primary), <alpha-value>)', foreground: 'rgba(var(--primary-foreground), <alpha-value>)', glow: 'rgba(var(--primary-glow), <alpha-value>)' },
+            muted: { DEFAULT: 'rgba(var(--muted), <alpha-value>)', foreground: 'rgba(var(--muted-foreground), <alpha-value>)' },
+            border: 'rgba(var(--border), <alpha-value>)',
+            'dark-surface': 'rgba(var(--dark-surface), <alpha-value>)',
+            'brand-soft': 'rgba(var(--brand-soft), <alpha-value>)',
+            'xp-gold': 'rgba(var(--xp-gold), <alpha-value>)',
+          },
+          boxShadow: { glow: '0 10px 40px -10px rgba(178, 59, 231, 0.5)' },
+          animation: { 'fade-in': 'fade-in 0.4s ease-out', 'pulse-glow': 'pulse-glow 2s ease-in-out infinite' }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#f2f1f5] dark:bg-[#121016] min-h-screen flex justify-center items-start">
+
+  <div class="min-h-screen w-full max-w-md bg-background relative pb-24 shadow-2xl flex flex-col overflow-x-hidden border-x border-border/40">
+
+    <!-- TopBar -->
+    <div id="topbar-placeholder"></div>
+
+    <!-- Quiz Picker View -->
+    <section class="px-4 pt-6 space-y-6 animate-fade-in flex flex-col">
+      <div>
+        <h1 class="text-2xl font-extrabold italic">Pilih Ujian</h1>
+        <p class="text-sm text-muted-foreground mt-1">Kerjakan ulangan untuk dapatkan XP, naik level, dan tantang boss.</p>
+      </div>
+
+      <!-- Bonus Banner -->
+      <div class="bg-gradient-to-br from-dark-surface to-primary rounded-3xl p-5 text-white relative overflow-hidden shadow-glow">
+        <div class="absolute -right-4 -top-4 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+        <div class="relative">
+          <span class="text-[10px] font-extrabold tracking-widest uppercase text-white/70">⚡ Hari Ini</span>
+          <h3 class="font-extrabold text-lg mt-1">Bonus 2x XP untuk ujian Matematika!</h3>
+        </div>
+      </div>
+
+      <!-- Exam Cards -->
+      <div class="space-y-3">
+
+        <!-- MTK -->
+        <a href="quiz-play.html?exam=mtk-matriks" class="block bg-card border border-border rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-primary/30 transition-all active:scale-[0.98] cursor-pointer">
+          <div class="flex gap-3 items-start">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-violet-500 to-purple-600 grid place-items-center text-white font-extrabold text-xs shadow-md shrink-0">MTK</div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Matematika</p>
+              <h4 class="font-extrabold text-base leading-tight">Matriks &amp; Determinan</h4>
+              <div class="flex flex-wrap gap-3 mt-2 text-xs text-muted-foreground">
+                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 30 mnt</span>
+                <span class="flex items-center gap-1"><i data-lucide="target" class="w-3.5 h-3.5"></i> 5 soal</span>
+                <span class="flex items-center gap-1"><i data-lucide="trophy" class="w-3.5 h-3.5"></i> Sedang</span>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-muted-foreground shrink-0 self-center"></i>
+          </div>
+        </a>
+
+        <!-- IND -->
+        <a href="quiz-play.html?exam=ind-eksplanasi" class="block bg-card border border-border rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-primary/30 transition-all active:scale-[0.98] cursor-pointer">
+          <div class="flex gap-3 items-start">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-500 to-pink-600 grid place-items-center text-white font-extrabold text-xs shadow-md shrink-0">IND</div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Bahasa Indonesia</p>
+              <h4 class="font-extrabold text-base leading-tight">Teks Eksplanasi</h4>
+              <div class="flex flex-wrap gap-3 mt-2 text-xs text-muted-foreground">
+                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 25 mnt</span>
+                <span class="flex items-center gap-1"><i data-lucide="target" class="w-3.5 h-3.5"></i> 5 soal</span>
+                <span class="flex items-center gap-1"><i data-lucide="trophy" class="w-3.5 h-3.5"></i> Mudah</span>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-muted-foreground shrink-0 self-center"></i>
+          </div>
+        </a>
+
+        <!-- PKN -->
+        <a href="quiz-play.html?exam=pkn-negara" class="block bg-card border border-border rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-primary/30 transition-all active:scale-[0.98] cursor-pointer">
+          <div class="flex gap-3 items-start">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 grid place-items-center text-white font-extrabold text-xs shadow-md shrink-0">PKN</div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">PPKn</p>
+              <h4 class="font-extrabold text-base leading-tight">Bentuk Negara</h4>
+              <div class="flex flex-wrap gap-3 mt-2 text-xs text-muted-foreground">
+                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 20 mnt</span>
+                <span class="flex items-center gap-1"><i data-lucide="target" class="w-3.5 h-3.5"></i> 5 soal</span>
+                <span class="flex items-center gap-1"><i data-lucide="trophy" class="w-3.5 h-3.5"></i> Mudah</span>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-muted-foreground shrink-0 self-center"></i>
+          </div>
+        </a>
+
+        <!-- BIO -->
+        <a href="quiz-play.html?exam=bio-genetika" class="block bg-card border border-border rounded-2xl p-4 shadow-sm hover:shadow-md hover:border-primary/30 transition-all active:scale-[0.98] cursor-pointer">
+          <div class="flex gap-3 items-start">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 grid place-items-center text-white font-extrabold text-xs shadow-md shrink-0">BIO</div>
+            <div class="flex-1 min-w-0">
+              <p class="text-[10px] font-bold text-muted-foreground uppercase tracking-wider">Biologi</p>
+              <h4 class="font-extrabold text-base leading-tight">Genetika &amp; Hereditas</h4>
+              <div class="flex flex-wrap gap-3 mt-2 text-xs text-muted-foreground">
+                <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 35 mnt</span>
+                <span class="flex items-center gap-1"><i data-lucide="target" class="w-3.5 h-3.5"></i> 5 soal</span>
+                <span class="flex items-center gap-1"><i data-lucide="trophy" class="w-3.5 h-3.5"></i> Sulit</span>
+              </div>
+            </div>
+            <i data-lucide="chevron-right" class="w-5 h-5 text-muted-foreground shrink-0 self-center"></i>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- BottomNav -->
+    <div id="bottomnav-placeholder"></div>
+  </div>
+
+  <!-- Shared JS -->
+  <script src="js/shared.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      bootPage('quiz');
+    });
+  </script>
+</body>
+</html>

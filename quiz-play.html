@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id" class="">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EduQuest — Main Ujian</title>
+  <meta name="description" content="Arena ujian EduQuest. Jawab soal, gunakan power-up, dan raih XP sebanyak mungkin.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            background: 'rgba(var(--background), <alpha-value>)',
+            foreground: 'rgba(var(--foreground), <alpha-value>)',
+            card: { DEFAULT: 'rgba(var(--card), <alpha-value>)', foreground: 'rgba(var(--card-foreground), <alpha-value>)' },
+            primary: { DEFAULT: 'rgba(var(--primary), <alpha-value>)', foreground: 'rgba(var(--primary-foreground), <alpha-value>)', glow: 'rgba(var(--primary-glow), <alpha-value>)' },
+            muted: { DEFAULT: 'rgba(var(--muted), <alpha-value>)', foreground: 'rgba(var(--muted-foreground), <alpha-value>)' },
+            border: 'rgba(var(--border), <alpha-value>)',
+            'dark-surface': 'rgba(var(--dark-surface), <alpha-value>)',
+            'brand-soft': 'rgba(var(--brand-soft), <alpha-value>)',
+            success: 'rgba(var(--success), <alpha-value>)',
+            warning: 'rgba(var(--warning), <alpha-value>)',
+            danger: 'rgba(var(--danger), <alpha-value>)',
+            'xp-gold': 'rgba(var(--xp-gold), <alpha-value>)',
+            'brand-blue': 'rgba(var(--brand-blue), <alpha-value>)',
+          },
+          boxShadow: { glow: '0 10px 40px -10px rgba(178, 59, 231, 0.5)' },
+          animation: {
+            'fade-in': 'fade-in 0.4s ease-out',
+            'scale-in': 'scale-in 0.2s ease-out',
+            'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+            float: 'float 4s ease-in-out infinite',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-[#f2f1f5] dark:bg-[#121016] min-h-screen flex justify-center items-start">
+
+  <!-- Mobile Wrapper — no topbar / bottomnav during quiz -->
+  <div id="quiz-wrapper" class="min-h-screen w-full max-w-md bg-background relative shadow-2xl flex flex-col overflow-x-hidden border-x border-border/40">
+    <!-- Entire content rendered by JS -->
+    <div id="quiz-play-content" class="flex-1 flex flex-col"></div>
+  </div>
+
+  <!-- Shared JS -->
+  <script src="js/shared.js"></script>
+
+  <!-- ============================================================
+       QUIZ PLAY ENGINE
+       ============================================================ -->
+  <script>
+    // ─── QUESTIONS DATABASE ──────────────────────────────────────
+    const ALL_EXAMS_QUESTIONS = {
+      'mtk-matriks': [
+        { q: "Jika A = [[2,1],[3,4]], maka determinan A adalah...", options: ["5","8","11","-5"], correct: 0, hint: "det = (a·d) − (b·c)" },
+        { q: "Hasil dari (2x + 3) bila x = 4 adalah...", options: ["10","11","14","9"], correct: 1, hint: "Substitusi nilai x langsung ke ekspresi." },
+        { q: "Matriks identitas berordo 2×2 memiliki diagonal utama bernilai...", options: ["0","1","2","−1"], correct: 1, hint: "Matriks identitas berisi 1 di diagonal, 0 di tempat lain." },
+        { q: "Jika f(x) = x² − 1 dan g(x) = 2x + 3, maka (g∘f)(2) = ...", options: ["6","9","11","12"], correct: 1, hint: "Hitung f(2) dulu, baru masukkan ke g." },
+        { q: "Invers dari matriks 2×2 A=[[1,2],[3,4]] memiliki determinan...", options: ["−2","2","10","0"], correct: 0, hint: "1·4 − 2·3." }
+      ],
+      'ind-eksplanasi': [
+        { q: "Teks eksplanasi bertujuan untuk...", options: ["Menceritakan fiksi","Menjelaskan proses terjadinya fenomena","Membujuk pembaca","Mengkritik kebijakan"], correct: 1, hint: "Fokus pada asal-usul, proses, atau sebab-akibat." },
+        { q: "Struktur teks eksplanasi secara berurutan adalah...", options: ["Pernyataan umum - deretan penjelas - interpretasi","Orientasi - komplikasi - resolusi","Tesis - argumen - penegasan ulang","Abstrak - krisis - reaksi"], correct: 0, hint: "Dimulai dari definisi umum, penjelasan proses, lalu kesimpulan." },
+        { q: "Kata penghubung kronologis dalam teks eksplanasi contohnya...", options: ["Sebab","Karena","Kemudian","Meskipun"], correct: 2, hint: "Menunjukkan urutan waktu kejadian." },
+        { q: "Konjungsi kausalitas dalam teks eksplanasi contohnya...", options: ["Lalu","Oleh karena itu","Setelah itu","Atau"], correct: 1, hint: "Menunjukkan hubungan sebab-akibat." },
+        { q: "Bagian akhir dalam teks eksplanasi disebut...", options: ["Tesis","Koda","Interpretasi","Reorientasi"], correct: 2, hint: "Berisi kesimpulan atau pandangan penulis atas fenomena." }
+      ],
+      'pkn-negara': [
+        { q: "Negara kesatuan adalah negara yang...", options: ["Terdiri dari banyak negara bagian","Kekuasaan tertingginya di tangan pemerintah pusat","Dipimpin oleh raja secara mutlak","Tidak memiliki konstitusi tertulis"], correct: 1, hint: "Unitarisme memusatkan kekuasaan pemerintahan." },
+        { q: "Bentuk negara Indonesia berdasarkan UUD 1945 Pasal 1 Ayat 1 adalah...", options: ["Republik","Kesatuan","Federasi","Monarki"], correct: 1, hint: "NKRI: Negara Kesatuan Republik Indonesia." },
+        { q: "Salah satu ciri bentuk pemerintahan Republik adalah kepala negaranya...", options: ["Dipilih berdasarkan keturunan","Dipilih untuk masa jabatan tertentu","Memiliki kekuasaan mutlak seumur hidup","Ditunjuk oleh negara lain"], correct: 1, hint: "Melalui pemilu atau mekanisme demokratis berkala." },
+        { q: "Kekuasaan untuk membuat undang-undang disebut kekuasaan...", options: ["Eksekutif","Yudikatif","Legislatif","Federatif"], correct: 2, hint: "Dilakukan oleh DPR/MPR di Indonesia." },
+        { q: "Pembagian kekuasaan horizontal artinya...", options: ["Antara pusat dan daerah","Antara lembaga-lembaga negara yang sederajat","Antara presiden dan menteri","Antara bupati dan walikota"], correct: 1, hint: "Sederajat, seperti legislatif, eksekutif, dan yudikatif." }
+      ],
+      'bio-genetika': [
+        { q: "Bagian sel yang membawa informasi genetik adalah...", options: ["Ribosom","Kromosom","Mitokondria","Lisosom"], correct: 1, hint: "Struktur pembawa gen di dalam inti sel." },
+        { q: "Basa nitrogen yang tidak ditemukan pada RNA adalah...", options: ["Adenin","Urasil","Timin","Sitosin"], correct: 2, hint: "Timin digantikan oleh Urasil pada RNA." },
+        { q: "Penemu hukum pewarisan sifat keturunan adalah...", options: ["Charles Darwin","Gregor Mendel","Louis Pasteur","Robert Hooke"], correct: 1, hint: "Bapak Genetika dengan percobaan kacang ercis." },
+        { q: "Persilangan monohibrid dominan penuh antara MM × mm menghasilkan keturunan F1...", options: ["Semua merah","Semua merah muda","Semua putih","1 Merah : 1 Putih"], correct: 0, hint: "Gen merah (M) bersifat dominan penuh atas putih (m)." },
+        { q: "Tempat terjadinya proses translasi dalam sintesis protein adalah...", options: ["Nukleus","Ribosom","Kloroplas","Vakuola"], correct: 1, hint: "Organel sel penerjemah kode mRNA menjadi asam amino." }
+      ]
+    };
+
+    const POWERUPS_DEFINITIONS = [
+      { id: "hint",   name: "Hint",   Icon: "lightbulb", color: "text-warning bg-warning/10 border-warning/30" },
+      { id: "fifty",  name: "50:50",  Icon: "target",    color: "text-brand-blue bg-brand-blue/10 border-brand-blue/30" },
+      { id: "shield", name: "Shield", Icon: "shield",    color: "text-success bg-success/10 border-success/30" },
+      { id: "freeze", name: "Freeze", Icon: "snowflake", color: "text-sky-500 bg-sky-500/10 border-sky-500/30" },
+      { id: "combo",  name: "2x",     Icon: "zap",       color: "text-primary bg-primary/10 border-primary/30" }
+    ];
+
+    const EXAMS_METADATA = {
+      "mtk-matriks":    { subject: "Matematika",      chapter: "Matriks & Determinan",  duration: 15 },
+      "ind-eksplanasi": { subject: "Bahasa Indonesia", chapter: "Teks Eksplanasi",       duration: 15 },
+      "pkn-negara":     { subject: "PPKn",             chapter: "Bentuk Negara",         duration: 15 },
+      "bio-genetika":   { subject: "Biologi",          chapter: "Genetika & Hereditas",  duration: 15 }
+    };
+
+    // ─── QUIZ STATE ───────────────────────────────────────────────
+    let currentQuizId       = '';
+    let quizQuestions       = [];
+    let currentQuestionIdx  = 0;
+    let quizPhase           = 'intro'; // intro | rolling | playing | review | finished
+    let userAnswers         = {};
+    let markedDoubt         = {};
+    let examTimerSecs       = 15 * 60;
+    let freezeTimerSecs     = 0;
+    let activeTimerInterval = null;
+    let unlockedPowerups    = [];
+    let usedPowerups        = [];
+    let rollItems           = ["hint","hint","hint"];
+    let hintShownForQuestion       = {};
+    let eliminatedOptionsForQuestion = {};
+    let doublePointsForQuestion    = {};
+
+    // ─── BOOT ────────────────────────────────────────────────────
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState(); // from shared.js
+      applyTheme();
+
+      const params  = new URLSearchParams(window.location.search);
+      const examId  = params.get('exam') || 'mtk-matriks';
+      startQuizPlay(examId);
+    });
+
+    // ─── START ───────────────────────────────────────────────────
+    function startQuizPlay(examId) {
+      currentQuizId      = examId;
+      quizQuestions      = ALL_EXAMS_QUESTIONS[examId] || ALL_EXAMS_QUESTIONS['mtk-matriks'];
+      currentQuestionIdx = 0;
+      quizPhase          = 'intro';
+      userAnswers        = {};
+      markedDoubt        = {};
+      hintShownForQuestion       = {};
+      eliminatedOptionsForQuestion = {};
+      doublePointsForQuestion    = {};
+      freezeTimerSecs    = 0;
+      usedPowerups       = [];
+      examTimerSecs      = (EXAMS_METADATA[examId]?.duration || 15) * 60;
+      renderQuizPlayContent();
+    }
+
+    // ─── RENDER ──────────────────────────────────────────────────
+    function renderQuizPlayContent() {
+      const container = document.getElementById('quiz-play-content');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const meta = EXAMS_METADATA[currentQuizId] || { subject: "Ujian", chapter: currentQuizId, duration: 15 };
+
+      // ── INTRO ────────────────────────────────────────────────
+      if (quizPhase === 'intro') {
+        container.innerHTML = `
+          <header class="px-4 py-3 flex items-center">
+            <a href="quiz.html" class="w-9 h-9 rounded-xl bg-muted flex items-center justify-center">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </a>
+          </header>
+          <main class="flex-1 px-6 flex flex-col justify-center text-center animate-fade-in">
+            <div class="w-24 h-24 rounded-3xl bg-gradient-to-br from-primary to-primary-glow mx-auto grid place-items-center shadow-glow animate-pulse-glow">
+              <i data-lucide="sparkles" class="w-12 h-12 text-primary-foreground" stroke-width="2.4"></i>
+            </div>
+            <p class="text-[11px] font-extrabold uppercase tracking-widest text-primary mt-6">${meta.subject}</p>
+            <h1 class="text-3xl font-extrabold italic mt-1 text-balance">${meta.chapter}</h1>
+            <p class="text-sm text-muted-foreground mt-3 max-w-xs mx-auto">Saat masuk arena, 3 power-up akan diundi secara acak. Hanya 3 itu yang bisa kamu pakai!</p>
+
+            <div class="grid grid-cols-3 gap-2 mt-8 max-w-xs mx-auto w-full">
+              <div class="bg-card border border-border rounded-2xl p-3 text-center">
+                <p class="text-xl font-extrabold italic tabular-nums">${quizQuestions.length}</p>
+                <p class="text-[10px] font-extrabold text-muted-foreground uppercase tracking-wider">Soal</p>
+              </div>
+              <div class="bg-card border border-border rounded-2xl p-3 text-center">
+                <p class="text-xl font-extrabold italic tabular-nums">${meta.duration}m</p>
+                <p class="text-[10px] font-extrabold text-muted-foreground uppercase tracking-wider">Waktu</p>
+              </div>
+              <div class="bg-card border border-border rounded-2xl p-3 text-center">
+                <p class="text-xl font-extrabold italic tabular-nums">3</p>
+                <p class="text-[10px] font-extrabold text-muted-foreground uppercase tracking-wider">Power</p>
+              </div>
+            </div>
+
+            <button onclick="startPowerupRaffle()" class="mt-10 w-full max-w-xs mx-auto py-4 rounded-2xl bg-gradient-to-r from-primary to-primary-glow text-primary-foreground font-extrabold shadow-glow active:scale-95 transition-all">
+              Mulai Ujian →
+            </button>
+            <a href="quiz.html" class="mt-2 text-sm font-bold text-muted-foreground py-3 block">Batal</a>
+          </main>
+        `;
+      }
+
+      // ── ROLLING ──────────────────────────────────────────────
+      else if (quizPhase === 'rolling') {
+        const done = unlockedPowerups.length > 0;
+        const slotsHtml = rollItems.map(id => {
+          const pu = POWERUPS_DEFINITIONS.find(p => p.id === id);
+          return `
+            <div class="w-24 h-24 rounded-3xl bg-white/10 backdrop-blur-xl border-2 ${done ? 'border-xp-gold shadow-[0_0_30px_rgba(252,211,77,0.5)] animate-scale-in' : 'border-white/30'} flex flex-col items-center justify-center gap-1.5 transition-all">
+              <i data-lucide="${pu.Icon}" class="w-8 h-8" stroke-width="2.4"></i>
+              <span class="text-[10px] font-extrabold uppercase tracking-wider">${pu.name}</span>
+            </div>
+          `;
+        }).join('');
+
+        container.innerHTML = `
+          <div class="min-h-screen bg-gradient-to-br from-dark-surface via-primary to-dark-surface text-primary-foreground flex flex-col items-center justify-center px-6 overflow-hidden relative">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.15),transparent_60%)]"></div>
+            <div class="relative text-center">
+              <p class="text-[11px] font-extrabold uppercase tracking-[0.3em] text-white/70">
+                ${done ? 'Power-up kamu' : 'Mengundi power-up...'}
+              </p>
+              <h1 class="text-2xl font-extrabold italic mt-2">
+                ${done ? 'Siap Tempur!' : 'Putar Roda Takdir'}
+              </h1>
+              <div class="flex gap-3 mt-10 justify-center">
+                ${slotsHtml}
+              </div>
+              ${done ? '<p class="text-sm text-white/80 mt-10 animate-fade-in">Memasuki arena...</p>' : ''}
+            </div>
+          </div>
+        `;
+      }
+
+      // ── PLAYING ──────────────────────────────────────────────
+      else if (quizPhase === 'playing') {
+        const q               = quizQuestions[currentQuestionIdx];
+        const isDouble        = doublePointsForQuestion[currentQuestionIdx];
+        const isDoubt         = markedDoubt[currentQuestionIdx];
+        const isHintShown     = hintShownForQuestion[currentQuestionIdx];
+        const elim            = eliminatedOptionsForQuestion[currentQuestionIdx] || [];
+        const progressPercent = ((currentQuestionIdx + 1) / quizQuestions.length) * 100;
+
+        const mm = String(Math.floor(examTimerSecs / 60)).padStart(2, "0");
+        const ss = String(examTimerSecs % 60).padStart(2, "0");
+
+        // Options
+        const optionsHtml = q.options.map((opt, idx) => {
+          const removed  = elim.includes(idx);
+          const selected = userAnswers[currentQuestionIdx] === idx;
+          let btnClass, badgeClass, textClass;
+          if (removed)       { btnClass = "opacity-30 line-through bg-muted border-border cursor-not-allowed"; badgeClass = "bg-muted text-muted-foreground"; textClass = "text-muted-foreground"; }
+          else if (selected) { btnClass = "border-primary bg-primary/5 shadow-glow"; badgeClass = "bg-primary text-primary-foreground"; textClass = "text-primary"; }
+          else               { btnClass = "bg-card border-border hover:border-primary/40"; badgeClass = "bg-muted text-muted-foreground"; textClass = ""; }
+          return `
+            <button ${removed ? 'disabled' : ''} onclick="selectQuizOption(${idx})"
+              class="w-full p-4 text-left rounded-2xl border-2 transition-all flex items-center gap-3 ${btnClass}">
+              <span class="w-8 h-8 rounded-lg grid place-items-center text-xs font-extrabold shrink-0 ${badgeClass}">${String.fromCharCode(65 + idx)}</span>
+              <span class="text-sm font-bold ${textClass}">${opt}</span>
+            </button>
+          `;
+        }).join('');
+
+        // Power-ups dock
+        const powerupsDockHtml = POWERUPS_DEFINITIONS.filter(pu => unlockedPowerups.includes(pu.id)).map(pu => {
+          const used = usedPowerups.includes(pu.id);
+          return `
+            <button ${used ? 'disabled' : ''} onclick="useActiveQuizPowerup('${pu.id}')"
+              class="relative shrink-0 w-16 h-16 rounded-2xl border-2 flex flex-col items-center justify-center gap-1 transition-all ${pu.color} ${used ? 'opacity-20 grayscale cursor-not-allowed' : 'active:scale-90 cursor-pointer'}">
+              <i data-lucide="${pu.Icon}" class="w-5 h-5" stroke-width="2.4"></i>
+              <span class="text-[9px] font-extrabold uppercase">${pu.name}</span>
+            </button>
+          `;
+        }).join('');
+
+        // Next / Submit button
+        const isLast = currentQuestionIdx === quizQuestions.length - 1;
+        const nextBtnHtml = isLast
+          ? `<button onclick="openQuizReviewOverlay()" class="flex-1 h-12 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white flex items-center justify-center gap-1.5 font-bold text-xs active:scale-95 transition-all shadow-glow shadow-emerald-500/20">
+               Selesai <i data-lucide="chevron-right" class="w-4 h-4 text-white"></i>
+             </button>`
+          : `<button onclick="nextQuizQuestion()" class="flex-1 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-900/60 flex items-center justify-center gap-1.5 font-bold text-xs active:scale-95 transition-all hover:bg-emerald-200/80">
+               Selanjutnya <i data-lucide="chevron-right" class="w-4 h-4 text-emerald-800 dark:text-emerald-300"></i>
+             </button>`;
+
+        container.innerHTML = `
+          <!-- Quiz Header -->
+          <header class="sticky top-0 bg-background/90 backdrop-blur-xl border-b border-border px-4 py-3 z-30 flex items-center justify-between">
+            <button onclick="confirmExitQuiz()" class="w-9 h-9 rounded-xl bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors">
+              <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+            <div class="flex items-center gap-1 bg-muted/60 rounded-full px-3 py-1.5 text-xs font-bold ${freezeTimerSecs > 0 ? 'text-sky-500' : 'text-foreground'}">
+              <i data-lucide="clock" class="w-3.5 h-3.5 ${freezeTimerSecs > 0 ? 'animate-pulse text-sky-500' : 'text-muted-foreground'}"></i>
+              <span class="font-mono">${freezeTimerSecs > 0 ? '❄ ' : ''}${mm}:${ss}</span>
+            </div>
+            <button onclick="openQuizReviewOverlay()" class="bg-card border border-border/80 hover:border-primary/30 transition-all rounded-full px-3 py-1.5 flex items-center gap-2 shadow-sm active:scale-95">
+              <i data-lucide="layout-grid" class="w-4 h-4 text-foreground"></i>
+              <span class="text-xs font-bold text-foreground font-mono leading-none">${currentQuestionIdx + 1}/${quizQuestions.length}</span>
+            </button>
+          </header>
+
+          <!-- Progress bar -->
+          <div class="h-1 w-full bg-muted overflow-hidden">
+            <div class="h-full bg-gradient-to-r from-primary to-primary-glow rounded-full transition-all duration-300" style="width:${progressPercent}%"></div>
+          </div>
+
+          <!-- Question + Options -->
+          <main class="flex-1 px-4 py-6 flex flex-col justify-between">
+            <div class="space-y-5 animate-fade-in">
+              <div class="flex items-center gap-2">
+                ${isDouble ? '<span class="px-2.5 py-1 bg-primary/10 text-primary rounded-full text-[10px] font-extrabold uppercase tracking-wider">⚡ 2x Poin</span>' : ''}
+              </div>
+              <h1 class="text-xl font-extrabold leading-snug text-balance">${q.q}</h1>
+
+              ${isHintShown ? `
+                <div class="bg-warning/10 border border-warning/30 rounded-xl p-3 flex gap-2 animate-fade-in">
+                  <i data-lucide="lightbulb" class="w-4 h-4 text-warning shrink-0 mt-0.5"></i>
+                  <p class="text-xs font-medium">${q.hint}</p>
+                </div>` : ''}
+
+              <div class="space-y-2.5">${optionsHtml}</div>
+            </div>
+
+            <!-- Footer: Power-ups + Navigation -->
+            <div class="mt-6 space-y-4">
+              <div class="space-y-2">
+                <p class="text-[10px] font-extrabold text-muted-foreground uppercase tracking-widest">Power-Up (Sekali Pakai)</p>
+                <div class="flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">${powerupsDockHtml}</div>
+              </div>
+
+              <!-- Navigation Row: [Prev] [Ragu-ragu] [Selanjutnya/Selesai] -->
+              <div class="flex gap-2.5 pt-2 items-center">
+                <button onclick="prevQuizQuestion()" ${currentQuestionIdx === 0 ? 'disabled' : ''}
+                  class="w-12 h-12 rounded-2xl bg-card border border-border text-foreground flex items-center justify-center shrink-0 active:scale-95 disabled:opacity-40 disabled:cursor-not-allowed disabled:active:scale-100 transition-all hover:border-primary/20">
+                  <i data-lucide="chevron-left" class="w-5 h-5 text-foreground"></i>
+                </button>
+
+                <button onclick="toggleQuizQuestionDoubt()"
+                  class="flex-1 h-12 rounded-2xl border-2 border-warning bg-card text-warning flex items-center justify-center gap-2 font-bold text-xs active:scale-95 transition-all shadow-sm">
+                  <i data-lucide="${isDoubt ? 'check-square' : 'square'}" class="w-4 h-4 text-warning"></i>
+                  Ragu-ragu
+                </button>
+
+                ${nextBtnHtml}
+              </div>
+            </div>
+          </main>
+        `;
+      }
+
+      // ── REVIEW ───────────────────────────────────────────────
+      else if (quizPhase === 'review') {
+        const answeredCount = Object.keys(userAnswers).length;
+        const gridBtnsHtml  = quizQuestions.map((_, idx) => {
+          const hasAns  = userAnswers[idx] !== undefined;
+          const isDoubt = markedDoubt[idx];
+          let btnClass  = isDoubt ? "bg-warning/20 border-warning text-warning"
+                        : hasAns  ? "bg-primary text-primary-foreground border-primary"
+                        :           "bg-card border-border text-muted-foreground";
+          return `
+            <button onclick="jumpToQuizQuestion(${idx})"
+              class="aspect-square rounded-xl font-extrabold text-sm border-2 transition-all grid place-items-center ${btnClass}">
+              ${idx + 1}
+            </button>`;
+        }).join('');
+
+        container.innerHTML = `
+          <header class="sticky top-0 bg-background/90 backdrop-blur-xl border-b border-border px-4 py-3 flex items-center gap-3">
+            <button onclick="resumeQuizPlay()" class="w-9 h-9 rounded-xl bg-muted flex items-center justify-center">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <h2 class="font-extrabold flex-1">Review Jawaban</h2>
+            <button onclick="submitQuizFinished()"
+              class="px-4 py-2 bg-primary text-primary-foreground font-extrabold rounded-xl text-sm shadow-glow hover:scale-105 active:scale-95 transition-transform">
+              Submit
+            </button>
+          </header>
+          <main class="px-4 py-6">
+            <div class="grid grid-cols-5 gap-2">${gridBtnsHtml}</div>
+            <div class="mt-6 space-y-2 text-xs text-muted-foreground">
+              <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-primary"></div><span>Dijawab</span></div>
+              <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-warning"></div><span>Ragu-ragu</span></div>
+              <div class="flex items-center gap-2"><div class="w-3 h-3 rounded bg-card border border-border"></div><span>Belum dijawab</span></div>
+            </div>
+            <p class="mt-6 text-center text-sm text-muted-foreground">
+              Sudah menjawab <span class="font-extrabold text-foreground">${answeredCount}/${quizQuestions.length}</span> soal
+            </p>
+          </main>
+        `;
+      }
+
+      // ── FINISHED ─────────────────────────────────────────────
+      else if (quizPhase === 'finished') {
+        let correctCount = 0, earnedXp = 0;
+        quizQuestions.forEach((q, idx) => {
+          if (userAnswers[idx] === q.correct) {
+            correctCount++;
+            earnedXp += doublePointsForQuestion[idx] ? 20 : 10;
+          }
+        });
+        const accuracy = Math.round((correctCount / quizQuestions.length) * 100);
+
+        // Update global state
+        appState.xp            += earnedXp;
+        appState.examsCompleted += 1;
+        appState.correctAnswers += correctCount;
+        saveState();
+
+        container.innerHTML = `
+          <div class="min-h-screen bg-gradient-to-br from-primary via-primary to-primary-glow text-primary-foreground flex flex-col justify-center items-center px-6">
+            <div class="flex-1 max-w-xs w-full py-16 flex flex-col items-center justify-center text-center animate-scale-in">
+              <i data-lucide="sparkles" class="w-16 h-16 text-xp-gold drop-shadow-lg animate-bounce"></i>
+              <h1 class="text-4xl font-extrabold italic mt-4">Selesai!</h1>
+              <p class="text-primary-foreground/80 mt-1">Hasil ujian ${meta.chapter}</p>
+
+              <div class="grid grid-cols-3 gap-3 mt-8 w-full">
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
+                  <p class="text-white/70 text-[10px] font-extrabold uppercase tracking-widest">Benar</p>
+                  <p class="text-2xl font-extrabold italic mt-1 tabular-nums">${correctCount}/${quizQuestions.length}</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-4 text-center">
+                  <p class="text-white/70 text-[10px] font-extrabold uppercase tracking-widest">Akurasi</p>
+                  <p class="text-2xl font-extrabold italic mt-1 tabular-nums">${accuracy}%</p>
+                </div>
+                <div class="bg-xp-gold text-dark-surface rounded-2xl p-4 text-center shadow-lg">
+                  <p class="text-dark-surface/70 text-[10px] font-extrabold uppercase tracking-widest">+XP</p>
+                  <p class="text-2xl font-extrabold italic mt-1 tabular-nums">${earnedXp}</p>
+                </div>
+              </div>
+
+              <div class="w-full mt-8 space-y-2">
+                <a href="index.html" class="block w-full bg-white text-primary font-extrabold py-4 rounded-2xl shadow-lg text-center active:scale-95 hover:bg-slate-50 transition-all">
+                  Kembali ke Beranda
+                </a>
+                <a href="leaderboard.html" class="block w-full bg-white/10 border border-white/20 text-white font-bold py-3 rounded-2xl backdrop-blur-sm text-center active:scale-95 transition-all">
+                  Lihat Leaderboard
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      lucide.createIcons();
+    }
+
+    // ─── POWERUP RAFFLE ──────────────────────────────────────────
+    function startPowerupRaffle() {
+      quizPhase = 'rolling';
+      renderQuizPlayContent();
+
+      const powerups = POWERUPS_DEFINITIONS.map(p => p.id);
+      const raffleInterval = setInterval(() => {
+        rollItems = [
+          powerups[Math.floor(Math.random() * powerups.length)],
+          powerups[Math.floor(Math.random() * powerups.length)],
+          powerups[Math.floor(Math.random() * powerups.length)]
+        ];
+        renderQuizPlayContent();
+      }, 80);
+
+      setTimeout(() => {
+        clearInterval(raffleInterval);
+        const shuffled   = [...powerups].sort(() => Math.random() - 0.5);
+        unlockedPowerups = shuffled.slice(0, 3);
+        rollItems        = [...unlockedPowerups];
+        renderQuizPlayContent();
+
+        setTimeout(() => {
+          quizPhase = 'playing';
+          renderQuizPlayContent();
+          startQuizTimer();
+        }, 1400);
+      }, 2200);
+    }
+
+    // ─── TIMER ───────────────────────────────────────────────────
+    function startQuizTimer() {
+      if (activeTimerInterval) clearInterval(activeTimerInterval);
+      activeTimerInterval = setInterval(() => {
+        if (quizPhase !== 'playing') { clearInterval(activeTimerInterval); return; }
+        if (freezeTimerSecs > 0)     { freezeTimerSecs--; renderQuizPlayContent(); return; }
+        if (examTimerSecs > 0) {
+          examTimerSecs--;
+          if (examTimerSecs === 0) submitQuizFinished();
+        }
+        renderQuizPlayContent();
+      }, 1000);
+    }
+
+    // ─── ACTIONS ─────────────────────────────────────────────────
+    function selectQuizOption(idx)    { userAnswers[currentQuestionIdx] = idx; renderQuizPlayContent(); }
+    function toggleQuizQuestionDoubt(){ markedDoubt[currentQuestionIdx] = !markedDoubt[currentQuestionIdx]; renderQuizPlayContent(); }
+    function prevQuizQuestion()       { if (currentQuestionIdx > 0)                          { currentQuestionIdx--; renderQuizPlayContent(); } }
+    function nextQuizQuestion()       { if (currentQuestionIdx < quizQuestions.length - 1)   { currentQuestionIdx++; renderQuizPlayContent(); } }
+    function openQuizReviewOverlay()  { quizPhase = 'review'; renderQuizPlayContent(); }
+    function resumeQuizPlay()         { quizPhase = 'playing'; renderQuizPlayContent(); }
+    function jumpToQuizQuestion(idx)  { currentQuestionIdx = idx; quizPhase = 'playing'; renderQuizPlayContent(); }
+
+    function submitQuizFinished() {
+      if (activeTimerInterval) clearInterval(activeTimerInterval);
+      quizPhase = 'finished';
+      renderQuizPlayContent();
+    }
+
+    function confirmExitQuiz() {
+      if (confirm("Apakah Anda yakin ingin keluar dari ujian? Semua progres akan hilang.")) {
+        if (activeTimerInterval) clearInterval(activeTimerInterval);
+        window.location.href = 'quiz.html';
+      }
+    }
+
+    function useActiveQuizPowerup(powerupId) {
+      if (usedPowerups.includes(powerupId)) return;
+      if (powerupId === 'hint') {
+        hintShownForQuestion[currentQuestionIdx] = true;
+      } else if (powerupId === 'fifty') {
+        const correct  = quizQuestions[currentQuestionIdx].correct;
+        const wrongOpts = quizQuestions[currentQuestionIdx].options
+          .map((_, i) => i).filter(i => i !== correct)
+          .sort(() => Math.random() - 0.5).slice(0, 2);
+        eliminatedOptionsForQuestion[currentQuestionIdx] = wrongOpts;
+      } else if (powerupId === 'freeze') {
+        freezeTimerSecs += 10;
+      } else if (powerupId === 'combo') {
+        doublePointsForQuestion[currentQuestionIdx] = true;
+      }
+      usedPowerups.push(powerupId);
+      renderQuizPlayContent();
+    }
+  </script>
+</body>
+</html>
