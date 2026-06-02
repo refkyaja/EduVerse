@@ -68,7 +68,6 @@
           <p class="text-primary-foreground/80 text-sm">XII MIPA 2 · SMA Negeri 1 Bandung</p>
           <div class="flex justify-center gap-2 mt-3 flex-wrap">
             <span id="profile-level-badge" class="px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-extrabold border border-white/30">Lv. 25 Master</span>
-            <span id="profile-streak-badge" class="px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-extrabold border border-white/30">🔥 7 hari</span>
             <span class="px-2.5 py-1 bg-white/20 backdrop-blur-sm rounded-full text-[10px] font-extrabold border border-white/30">#4 Nasional</span>
           </div>
         </div>
@@ -90,86 +89,9 @@
         </div>
       </div>
 
-      <!-- Academic Analysis -->
-      <div class="space-y-3">
-        <h3 class="font-extrabold text-lg">Analisis Akademik</h3>
-        <div class="bg-card border border-border rounded-2xl p-4 space-y-3">
 
-          <!-- Biologi - Favorite -->
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-muted rounded-xl grid place-items-center shrink-0">
-              <i data-lucide="atom" class="w-5 h-5 text-success"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Biologi</p>
-              <p class="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">Pelajaran Favorit</p>
-            </div>
-            <div class="flex items-center gap-1">
-              <i data-lucide="trending-up" class="w-4 h-4 text-success"></i>
-              <span class="font-extrabold tabular-nums text-sm text-success">88%</span>
-            </div>
-          </div>
 
-          <!-- Matematika - Berkembang -->
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-muted rounded-xl grid place-items-center shrink-0">
-              <i data-lucide="calculator" class="w-5 h-5 text-primary"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Matematika</p>
-              <p class="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">Sedang Berkembang</p>
-            </div>
-            <div class="flex items-center gap-1">
-              <i data-lucide="trending-up" class="w-4 h-4 text-primary"></i>
-              <span class="font-extrabold tabular-nums text-sm text-primary">64%</span>
-            </div>
-          </div>
 
-          <!-- Bahasa Indonesia - Perlu Latihan -->
-          <div class="flex items-center gap-3">
-            <div class="w-10 h-10 bg-muted rounded-xl grid place-items-center shrink-0">
-              <i data-lucide="languages" class="w-5 h-5 text-danger"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-extrabold text-sm">Bahasa Indonesia</p>
-              <p class="text-[10px] text-muted-foreground uppercase tracking-wider font-bold">Perlu Latihan</p>
-            </div>
-            <div class="flex items-center gap-1">
-              <i data-lucide="trending-down" class="w-4 h-4 text-danger"></i>
-              <span class="font-extrabold tabular-nums text-sm text-danger">42%</span>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Power-up Inventory (display only, no counts) -->
-      <div class="space-y-3">
-        <h3 class="font-extrabold text-lg">Power-Up Tersedia</h3>
-        <div class="grid grid-cols-4 gap-3">
-          <div class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5">
-            <i data-lucide="lightbulb" class="w-6 h-6 text-warning" stroke-width="2.2"></i>
-            <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">Hint</span>
-          </div>
-          <div class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5">
-            <i data-lucide="target" class="w-6 h-6 text-brand-blue" stroke-width="2.2"></i>
-            <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">50:50</span>
-          </div>
-          <div class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5">
-            <i data-lucide="shield" class="w-6 h-6 text-success" stroke-width="2.2"></i>
-            <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">Shield</span>
-          </div>
-          <div class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5">
-            <i data-lucide="snowflake" class="w-6 h-6 text-sky-500" stroke-width="2.2"></i>
-            <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">Freeze</span>
-          </div>
-          <div class="aspect-square bg-card rounded-2xl border border-border flex flex-col items-center justify-center gap-1.5">
-            <i data-lucide="zap" class="w-6 h-6 text-primary" stroke-width="2.2"></i>
-            <span class="text-[9px] font-extrabold text-muted-foreground uppercase tracking-wider">2x</span>
-          </div>
-        </div>
-        <p class="text-xs text-muted-foreground text-center">Power-up diundi acak saat memulai ujian · sekali pakai</p>
-      </div>
 
       <!-- Settings -->
       <div class="space-y-2">
@@ -193,12 +115,7 @@
           <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
         </button>
 
-        <!-- Reset Stats (dev helper) -->
-        <button onclick="resetStats()"
-          class="w-full bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-danger/30 transition-colors">
-          <i data-lucide="rotate-ccw" class="w-5 h-5 text-danger"></i>
-          <span class="font-bold text-sm flex-1 text-left text-danger">Reset Statistik</span>
-        </button>
+
 
       </div>
 
@@ -235,28 +152,12 @@
       const lvlBadge = document.getElementById('profile-level-badge');
       if (lvlBadge) lvlBadge.textContent = `Lv. ${lvlInfo.level} Master`;
 
-      // Streak badge
-      const streakBadge = document.getElementById('profile-streak-badge');
-      if (streakBadge) streakBadge.textContent = `🔥 ${appState.streak} hari`;
-
       // Topbar
       const tbXP     = document.getElementById('topbar-xp');
-      const tbStreak = document.getElementById('topbar-streak');
       if (tbXP)     tbXP.textContent     = `${appState.xp.toLocaleString()} XP`;
-      if (tbStreak) tbStreak.textContent  = appState.streak;
     }
 
-    function resetStats() {
-      if (!confirm('Reset semua statistik? Tindakan ini tidak bisa dibatalkan.')) return;
-      appState.xp            = 3950;
-      appState.streak        = 7;
-      appState.examsCompleted= 42;
-      appState.correctAnswers= 0;
-      appState.quests        = appState.quests.map(q => ({ ...q, done: false }));
-      saveState();
-      syncProfileStats();
-      showToast('Statistik direset ke nilai awal!');
-    }
+
   </script>
 </body>
 </html>

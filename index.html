@@ -319,9 +319,7 @@
 
       // Topbar sync
       const tbXP    = document.getElementById('topbar-xp');
-      const tbStreak= document.getElementById('topbar-streak');
       if (tbXP)     tbXP.textContent    = `${appState.xp.toLocaleString()} XP`;
-      if (tbStreak) tbStreak.textContent = appState.streak;
 
       renderQuests();
     }

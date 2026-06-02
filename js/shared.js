@@ -84,10 +84,6 @@ function injectTopBar(activePage) {
         <span class="font-extrabold text-xl tracking-tight">EduQuest</span>
       </div>
       <div class="flex items-center gap-2">
-        <div class="bg-card border border-border rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm">
-          <i data-lucide="flame" class="w-4 h-4 text-warning fill-warning"></i>
-          <span id="topbar-streak" class="font-bold text-xs">${appState.streak}</span>
-        </div>
         <div class="bg-card border border-primary/20 rounded-full px-3 py-1.5 flex items-center gap-1.5 shadow-sm">
           <div class="w-3 h-3 bg-xp-gold rounded-full shadow-[0_0_8px_rgba(251,191,36,0.8)]"></div>
           <span id="topbar-xp" class="font-bold text-xs tabular-nums">${appState.xp.toLocaleString()} XP</span>
