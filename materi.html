@@ -237,6 +237,14 @@
               </div>
               <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
             </button>
+            <button onclick="openMateriModal('pbt-warming')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">02</div>
+              <div class="flex-1 min-w-0">
+                <p class="font-bold text-sm">Warming Up</p>
+                <p class="text-xs text-muted-foreground">Latihan Soal</p>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
+            </button>
           </div>
         </section>
 
@@ -1562,6 +1570,217 @@ btnHitung.Text = "HITUNG";
 
 // SALAH (error!)
 "Hitungan".Text = "HITUNG";</pre>`
+      },
+      'pbt-warming': {
+        title: 'Warming Up',
+        content: `<h4 class="font-extrabold text-base mb-2">JAWABAN SOAL LATIHAN WARMING UP PBT ASAT 2025-2026</h4>
+<p class="text-muted-foreground font-bold">KELAS XI RPL — PEMROGRAMAN BERBASIS GRAFIS</p>
+
+<hr class="border-border my-4">
+
+<h4 class="font-extrabold text-base mt-5 mb-2">STUDI KASUS 1: APLIKASI PENGUBAH WARNA HALAMAN (Color Changer App)</h4>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 1: Penguasaan Tools &amp; Toolbox (Bobot 30%)</p>
+
+<p class="font-bold text-xs mt-3">A. 3 Nama Komponen (Tools) pada Toolbox Visual Studio yang wajib ditarik ke dalam Form:</p>
+<ol class="list-decimal pl-5 space-y-1 text-muted-foreground">
+  <li><strong>TextBox</strong></li>
+  <li><strong>Label</strong></li>
+  <li><strong>Button</strong> (dua buah)</li>
+</ol>
+
+<p class="font-bold text-xs mt-3">B. Fungsi utama masing-masing komponen:</p>
+<div class="overflow-x-auto mt-1">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Komponen</th><th class="border border-border p-2 text-left">Fungsi Utama</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2 align-top font-semibold">TextBox</td><td class="border border-border p-2">Berfungsi sebagai <strong>input field</strong> tempat pengguna mengetikkan teks. Pengguna dapat mengetik dan mengedit teks. Teks diambil melalui properti <code>Text</code>.</td></tr>
+    <tr><td class="border border-border p-2 align-top font-semibold">Label</td><td class="border border-border p-2">Berfungsi sebagai <strong>output display</strong> untuk menampilkan teks hasil. Label bersifat <strong>read-only</strong>, cocok untuk menampilkan teks yang berubah mengikuti input.</td></tr>
+    <tr><td class="border border-border p-2 align-top font-semibold">Button</td><td class="border border-border p-2">Berfungsi sebagai <strong>trigger action</strong>. Event <code>Click</code> akan menjalankan kode di dalamnya. Aplikasi membutuhkan dua button: satu untuk mengubah teks label, satu lagi untuk mengubah warna background form.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 2: Pengaturan Jendela Properties (Bobot 40%)</p>
+
+<p class="font-bold text-xs mt-3">A. Nama Properti untuk mengganti tulisan pada tombol dari "button1" menjadi "UBAH WARNA":</p>
+<p class="text-muted-foreground"><strong>Jawaban: Properti <code>Text</code></strong></p>
+<p class="text-muted-foreground">Properti <code>Text</code> digunakan untuk mengubah tulisan yang tampil pada komponen. Cari kategori "Appearance" lalu ubah <code>Text</code>.</p>
+
+<p class="font-bold text-xs mt-3">B. Mengapa mengubah properti <code>Name</code> pada setiap komponen sangat penting sebelum menulis kode?</p>
+<ol class="list-decimal pl-5 space-y-1 text-muted-foreground">
+  <li><strong>READABILITY:</strong> Nama bermakna membuat kode mudah dibaca. Contoh: <code>txtInput</code>, <code>btnUbah</code>.</li>
+  <li><strong>MAINTAINABILITY:</strong> Programmer lain mudah memahami fungsi komponen.</li>
+  <li><strong>ERROR PREVENTION:</strong> Nama unik mencegah tertukar saat memanggil komponen.</li>
+  <li><strong>EFFICIENCY:</strong> Autocomplete lebih membantu dengan nama spesifik.</li>
+  <li><strong>PROFESSIONAL STANDARD:</strong> Praktik standar industri (clean code).</li>
+</ol>
+
+<p class="font-bold text-xs mt-3">C. Nama properti untuk mengatur judul aplikasi pada pojok kiri atas jendela Windows:</p>
+<p class="text-muted-foreground"><strong>Jawaban: Properti <code>Text</code> (pada Form)</strong></p>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 3: Pemahaman Event Handling (Bobot 30%)</p>
+
+<p class="font-bold text-xs mt-3">A. Event yang bekerja saat pengguna mengklik tombol, dan cara paling cepat memunculkan blok kode event tersebut:</p>
+<p class="text-muted-foreground"><strong>Jawaban:</strong> Event <code>Click</code>. Cara paling cepat: <strong>Double-click</strong> pada Button di Designer View.</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">private void namaButton_Click(object sender, EventArgs e)
+{
+    // Kode ditulis di sini
+}</pre>
+
+<p class="font-bold text-xs mt-3">B. Jelaskan maksud/efek dari kode <code>this.BackColor = Color.Red;</code></p>
+<ul class="list-disc pl-5 space-y-1 text-muted-foreground">
+  <li><code>this</code> — mengacu ke <strong>Form saat ini</strong>.</li>
+  <li><code>BackColor</code> — properti warna <strong>latar belakang</strong>.</li>
+  <li><code>Color.Red</code> — konstanta warna <strong>merah</strong>.</li>
+</ul>
+<p class="text-muted-foreground"><strong>Efek:</strong> Seluruh background jendela aplikasi berubah menjadi merah.</p>
+
+<hr class="border-border my-4">
+
+<h4 class="font-extrabold text-base mt-5 mb-2">STUDI KASUS 2: APLIKASI PANGKAT DUA (Square Calculator App)</h4>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 1: Penguasaan Tools &amp; Toolbox (Bobot 30%)</p>
+
+<p class="font-bold text-xs mt-3">A. 3 Nama komponen yang wajib diletakkan ke dalam Form:</p>
+<ol class="list-decimal pl-5 space-y-1 text-muted-foreground">
+  <li><strong>TextBox</strong> — input angka.</li>
+  <li><strong>Button</strong> — trigger perhitungan.</li>
+  <li><strong>Label</strong> — menampilkan hasil.</li>
+</ol>
+
+<p class="font-bold text-xs mt-3">B. Komponen yang berfungsi khusus menampilkan output agar tidak bisa diubah secara tidak sengaja:</p>
+<p class="text-muted-foreground"><strong>Jawaban: <code>Label</code></strong> karena bersifat <strong>read-only</strong>. Pengguna tidak bisa mengedit teks secara langsung, berbeda dengan TextBox.</p>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 2: Pengaturan Jendela Properties (Bobot 40%)</p>
+
+<p class="font-bold text-xs mt-3">A. Properti agar kotak teks input menerima ketikan di posisi tengah:</p>
+<p class="text-muted-foreground"><strong>Jawaban: <code>TextAlign = Center</code></strong></p>
+
+<p class="font-bold text-xs mt-3">B. Usulan nama <code>Name</code> yang baik sesuai clean code:</p>
+<div class="overflow-x-auto mt-1">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Komponen</th><th class="border border-border p-2 text-left">Nama Standar</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2">TextBox (Input Angka)</td><td class="border border-border p-2"><code>txtAngka</code></td></tr>
+    <tr><td class="border border-border p-2">Button (Tombol Hitung)</td><td class="border border-border p-2"><code>btnHitung</code></td></tr>
+    <tr><td class="border border-border p-2">Label (Hasil)</td><td class="border border-border p-2"><code>lblHasil</code></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="font-bold text-xs mt-3">C. Properti untuk menghilangkan ikon standar Windows di pojok kiri atas Form:</p>
+<p class="text-muted-foreground"><strong>Jawaban: Properti <code>Icon</code></strong> — biarkan kosong atau pilih <code>(None)</code>.</p>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 3: Event Handling &amp; Logika Dasar (Bobot 30%)</p>
+
+<p class="font-bold text-xs mt-3">A. Langkah alternatif untuk melihat seluruh daftar Event yang tersedia pada suatu komponen:</p>
+<ol class="list-decimal pl-5 space-y-1 text-muted-foreground">
+  <li>Klik komponen di Designer View.</li>
+  <li>Buka Properties Window.</li>
+  <li>Klik ikon <strong>⚡ Events</strong> (petir).</li>
+  <li>Double-click pada nama event yang diinginkan.</li>
+</ol>
+
+<p class="font-bold text-xs mt-3">B. Jelaskan alur logika dari kode berikut:</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">private void btnHitung_Click(object sender, EventArgs e)
+{
+    int angka = Convert.ToInt32(txtAngka.Text);
+    int hasil = angka * angka;
+    lblHasil.Text = "Hasil: " + hasil.ToString();
+}</pre>
+<div class="overflow-x-auto mt-1">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Baris</th><th class="border border-border p-2 text-left">Penjelasan</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2 align-top">1</td><td class="border border-border p-2">Ambil teks dari <code>txtAngka</code>, ubah ke integer dengan <code>Convert.ToInt32()</code>, simpan ke variabel <code>angka</code>.</td></tr>
+    <tr><td class="border border-border p-2 align-top">2</td><td class="border border-border p-2">Hitung pangkat dua: <code>angka * angka</code>, simpan ke variabel <code>hasil</code>.</td></tr>
+    <tr><td class="border border-border p-2 align-top">3</td><td class="border border-border p-2">Tampilkan <code>"Hasil: " + hasil</code> ke Label <code>lblHasil</code>.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<hr class="border-border my-4">
+
+<h4 class="font-extrabold text-base mt-5 mb-2">STUDI KASUS 3: APLIKASI TEBAK NAMA HEWAN/TANAMAN (Flora-Fauna Quiz)</h4>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 1: Penguasaan Tools &amp; Kotak Media (Bobot 30%)</p>
+
+<p class="font-bold text-xs mt-3">A. 4 Nama komponen yang wajib dipasang ke dalam Form:</p>
+<ol class="list-decimal pl-5 space-y-1 text-muted-foreground">
+  <li><strong>PictureBox</strong> — menampilkan gambar.</li>
+  <li><strong>TextBox</strong> — input jawaban.</li>
+  <li><strong>Button</strong> — trigger pengecekan ("Cek Jawaban").</li>
+  <li><strong>Label</strong> — menampilkan status Benar/Salah.</li>
+</ol>
+
+<p class="font-bold text-xs mt-3">B. Nama komponen untuk menampilkan file gambar dan properti untuk memasukkan gambar:</p>
+<p class="text-muted-foreground"><strong>Jawaban:</strong> Komponen <code>PictureBox</code>, properti <code>Image</code>.</p>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 2: Pengaturan Jendela Properties (Bobot 40%)</p>
+
+<p class="font-bold text-xs mt-3">A. Properti agar gambar otomatis menyesuaikan ukuran kotak tanpa terpotong:</p>
+<p class="text-muted-foreground"><strong>Jawaban: <code>SizeMode = Zoom</code></strong> — gambar fit otomatis, proporsi terjaga.</p>
+
+<p class="font-bold text-xs mt-3">B. Rencana penamaan <code>Name</code> yang baik untuk keempat komponen:</p>
+<div class="overflow-x-auto mt-1">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Komponen</th><th class="border border-border p-2 text-left">Nama Standar</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2">PictureBox</td><td class="border border-border p-2"><code>picHewan</code> / <code>picGambar</code></td></tr>
+    <tr><td class="border border-border p-2">TextBox</td><td class="border border-border p-2"><code>txtJawaban</code></td></tr>
+    <tr><td class="border border-border p-2">Button</td><td class="border border-border p-2"><code>btnCek</code></td></tr>
+    <tr><td class="border border-border p-2">Label</td><td class="border border-border p-2"><code>lblStatus</code></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="font-bold text-xs mt-3">C. Cara membuat teks label status hasil tebakan kosong saat aplikasi pertama kali dibuka:</p>
+<p class="text-muted-foreground">Melalui Properties Window: klik Label → properti <code>Text</code> → kosongkan → Enter.</p>
+
+<p class="font-bold text-sm mt-4">Pertanyaan 3: Event Handling &amp; Logika Percabangan (Bobot 30%)</p>
+
+<p class="font-bold text-xs mt-3">A. Alur berpikir (algoritma) di dalam Event Click pada tombol "Cek Jawaban":</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">START (Tombol "Cek Jawaban" diklik)
+│
+├─ 1. Ambil teks dari txtJawaban
+├─ 2. Bandingkan dengan "Gajah"
+├─ 3. Jika txtJawaban.Text == "Gajah":
+│      ├─ lblStatus.Text = "Jawaban Anda Benar!"
+│      └─ lblStatus.ForeColor = Color.Green
+└─ Jika tidak:
+       ├─ lblStatus.Text = "Jawaban Salah, Coba Lagi!"
+       └─ lblStatus.ForeColor = Color.Red</pre>
+
+<p class="font-bold text-xs mt-3">B. Fungsi properti <code>.ForeColor</code> dan dampak visualnya:</p>
+<p class="text-muted-foreground"><code>ForeColor</code> mengatur <strong>warna teks</strong>. Jika benar → hijau (<code>Color.Green</code>), jika salah → merah (<code>Color.Red</code>). Hijau diasosiasikan dengan sukses/positif, merah dengan peringatan/kesalahan.</p>
+
+<hr class="border-border my-4">
+
+<h4 class="font-extrabold text-base mt-5 mb-2">RANGKUMAN JAWABAN PENTING UNTUK UJIAN</h4>
+<div class="overflow-x-auto mt-2">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Pertanyaan</th><th class="border border-border p-2 text-left">Jawaban Singkat</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2">Properti ganti tulisan tombol</td><td class="border border-border p-2"><code>Text</code></td></tr>
+    <tr><td class="border border-border p-2">Properti ganti nama komponen (untuk kode)</td><td class="border border-border p-2"><code>Name</code></td></tr>
+    <tr><td class="border border-border p-2">Properti judul form</td><td class="border border-border p-2"><code>Text</code> (pada Form)</td></tr>
+    <tr><td class="border border-border p-2">Properti text alignment tengah</td><td class="border border-border p-2"><code>TextAlign = Center</code></td></tr>
+    <tr><td class="border border-border p-2">Properti hapus ikon form</td><td class="border border-border p-2"><code>Icon</code> (kosongkan)</td></tr>
+    <tr><td class="border border-border p-2">Properti gambar fit otomatis</td><td class="border border-border p-2"><code>SizeMode = Zoom</code></td></tr>
+    <tr><td class="border border-border p-2">Properti memasukkan gambar</td><td class="border border-border p-2"><code>Image</code></td></tr>
+    <tr><td class="border border-border p-2">Event saat klik tombol</td><td class="border border-border p-2"><code>Click</code></td></tr>
+    <tr><td class="border border-border p-2">Cara cepat buat event</td><td class="border border-border p-2">Double-click komponen di Designer</td></tr>
+    <tr><td class="border border-border p-2">Komponen output (tidak bisa diedit)</td><td class="border border-border p-2"><code>Label</code></td></tr>
+    <tr><td class="border border-border p-2">Komponen input (bisa diedit)</td><td class="border border-border p-2"><code>TextBox</code></td></tr>
+    <tr><td class="border border-border p-2">Komponen trigger aksi</td><td class="border border-border p-2"><code>Button</code></td></tr>
+    <tr><td class="border border-border p-2">Komponen tampil gambar</td><td class="border border-border p-2"><code>PictureBox</code></td></tr>
+    <tr><td class="border border-border p-2">Fungsi <code>ForeColor</code></td><td class="border border-border p-2">Mengubah warna teks</td></tr>
+    <tr><td class="border border-border p-2">Fungsi <code>BackColor</code></td><td class="border border-border p-2">Mengubah warna latar belakang</td></tr>
+    <tr><td class="border border-border p-2"><code>this</code> dalam kode</td><td class="border border-border p-2">Mengacu ke Form saat ini</td></tr>
+  </tbody>
+</table>
+</div>`
       },
       'pabp-buku': {
         title: 'Buku Paket',
