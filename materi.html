@@ -229,10 +229,10 @@
             <h3 class="font-extrabold">Pbt</h3>
           </div>
           <div class="space-y-2 pl-1">
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+            <button onclick="openMateriModal('pbt-tools')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
               <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">01</div>
               <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Kosong</p>
+                <p class="font-bold text-sm">Tools & Fungsinya pada Visual Studio</p>
                 <p class="text-xs text-muted-foreground">Ringkasan · Materi</p>
               </div>
               <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
@@ -1102,6 +1102,466 @@ php artisan serve</pre>
     return view('dashboard');
 })->middleware('auth');</pre>
 <p class="text-muted-foreground mt-1">Alur: User → Middleware Auth → Dashboard. Kalau belum login → Redirect ke Login.</p>`
+      },
+      'pbt-tools': {
+        title: 'Tools & Fungsinya pada Visual Studio',
+        content: `<h4 class="font-extrabold text-base mb-2">Pengenalan IDE Visual Studio</h4>
+<p class="font-bold text-sm mt-2">Apa itu Visual Studio?</p>
+<p class="text-muted-foreground">Visual Studio adalah <strong>Integrated Development Environment (IDE)</strong> yang powerful untuk membuat aplikasi Windows Forms (GUI Application) menggunakan bahasa C# atau VB.NET.</p>
+
+<p class="font-bold text-sm mt-3">Interface Utama Visual Studio:</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">┌─────────────────────────────────────────────┐
+│  Menu Bar (File, Edit, View, Project, etc)  │
+├─────────┬───────────────────────┬───────────┤
+│Toolbox  │   Designer View       │ Properties│
+│(Kiri)   │   (Tengah)            │ (Kanan)   │
+│         │   [Tempat drag drop   │           │
+│ - Label │    komponen visual]   │ - Name    │
+│ - Button│                       │ - Text    │
+│ - TextBox                       │ - Color   │
+│ - etc   │   Form yang sedang    │ - Size    │
+│         │   didesain            │ - Font    │
+│         │                       │ - etc     │
+├─────────┴───────────────────────┴───────────┤
+│    Solution Explorer (Daftar file project)   │
+└─────────────────────────────────────────────┘</pre>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">1. Tools &amp; Toolbox — Komponen Visual</h4>
+<p class="font-bold text-sm mt-2">Pengertian Tools/Komponen:</p>
+<p class="text-muted-foreground"><strong>Tools</strong> adalah objek visual (komponen UI) yang bisa kita drag-drop dari Toolbox ke dalam Form untuk membuat antarmuka aplikasi.</p>
+
+<p class="font-bold text-sm mt-3">Komponen-Komponen Utama:</p>
+
+<p class="font-bold text-sm mt-3">1. LABEL (Display/Output)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi:
+- Menampilkan teks statis atau hasil perhitungan
+- TIDAK bisa diedit langsung oleh pengguna
+- Ideal untuk: menampilkan output, judul, atau pesan status
+
+Identifikasi Visual: Kotak teks yang "baca saja"
+Nama default: label1, label2, dll</pre>
+
+<p class="font-bold text-sm mt-3">2. TEXTBOX (Input)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi:
+- Menerima input teks dari pengguna
+- Pengguna BISA mengetik dan mengedit
+- Ideal untuk: input angka, nama, atau teks apapun
+
+Identifikasi Visual: Kotak teks putih yang bisa diklik
+Nama default: textBox1, textBox2, dll</pre>
+
+<p class="font-bold text-sm mt-3">3. BUTTON (Action/Trigger)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi:
+- Memicu tindakan/event ketika diklik pengguna
+- Digunakan untuk menjalankan kode program
+- Ideal untuk: submit, hitung, cek, ubah, dll
+
+Identifikasi Visual: Tombol yang bisa diklik
+Nama default: button1, button2, dll</pre>
+
+<p class="font-bold text-sm mt-3">4. PICTUREBOX (Display Media)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi:
+- Menampilkan gambar (.jpg, .png, .bmp, dll)
+- Tidak bisa diedit pengguna
+- Ideal untuk: menampilkan foto, ikon, atau ilustrasi
+
+Identifikasi Visual: Kotak yang bisa menampung gambar
+Nama default: pictureBox1, pictureBox2, dll</pre>
+
+<p class="font-bold text-sm mt-3">Tabel Perbandingan Komponen:</p>
+<div class="overflow-x-auto mt-2">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Komponen</th><th class="border border-border p-2 text-left">Tipe</th><th class="border border-border p-2 text-left">Input/Output</th><th class="border border-border p-2 text-left">Diedit User?</th><th class="border border-border p-2 text-left">Nama Default</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2">Label</td><td class="border border-border p-2">Display</td><td class="border border-border p-2">Output</td><td class="border border-border p-2">Tidak</td><td class="border border-border p-2">label1</td></tr>
+    <tr><td class="border border-border p-2">TextBox</td><td class="border border-border p-2">Input</td><td class="border border-border p-2">Input</td><td class="border border-border p-2">Ya</td><td class="border border-border p-2">textBox1</td></tr>
+    <tr><td class="border border-border p-2">Button</td><td class="border border-border p-2">Action</td><td class="border border-border p-2">Trigger</td><td class="border border-border p-2">Tidak</td><td class="border border-border p-2">button1</td></tr>
+    <tr><td class="border border-border p-2">PictureBox</td><td class="border border-border p-2">Display</td><td class="border border-border p-2">Media</td><td class="border border-border p-2">Tidak</td><td class="border border-border p-2">pictureBox1</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">2. Properties Window — Pengaturan Komponen</h4>
+<p class="text-muted-foreground"><strong>Properties</strong> adalah atribut/karakteristik dari sebuah komponen. Kita bisa mengubah Properties untuk mengatur tampilan dan perilaku komponen sebelum menulis kode.</p>
+
+<p class="font-bold text-sm mt-3">A. Properti "Name" (PALING PENTING!)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window → Kategori "Design" → Name
+Fungsi: Memberikan nama unik untuk setiap komponen.
+Nama ini digunakan saat menulis kode program.
+
+Contoh Nama Standar (Clean Code):
+- Label untuk hasil      → lblHasil, lblStatus
+- TextBox untuk input    → txtAngka, txtJawaban, txtNama
+- Button untuk aksi      → btnHitung, btnMerah, btnCek
+- PictureBox untuk foto  → picGambar, picHewan</pre>
+
+<p class="font-bold text-sm mt-3">B. Properti "Text" (Tampilan Teks)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window → Kategori "Appearance" → Text
+Fungsi: Mengubah tulisan yang tampil pada komponen.
+- Button: "UBAH WARNA", "HITUNG", "CEK JAWABAN"
+- Label: teks awal atau kosong
+- Form: judul jendela aplikasi</pre>
+
+<p class="font-bold text-sm mt-3">C. Properti "ForeColor" (Warna Teks)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window → ForeColor
+Fungsi: Mengubah warna huruf/teks pada komponen.
+Contoh:
+lblStatus.ForeColor = Color.Green;   // Teks hijau (Benar!)
+lblStatus.ForeColor = Color.Red;     // Teks merah (Salah!)</pre>
+
+<p class="font-bold text-sm mt-3">D. Properti "BackColor" (Warna Latar Belakang)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window → BackColor
+Fungsi: Mengubah warna background/latar belakang.
+Contoh:
+Form1.BackColor = Color.Red;
+btnHitung.BackColor = Color.Blue;</pre>
+
+<p class="font-bold text-sm mt-3">E. Properti "TextAlign" (Pelurusan Teks)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window → TextAlign
+Fungsi: Mengatur posisi teks dalam komponen.
+Opsi: Left, Center, Right</pre>
+
+<p class="font-bold text-sm mt-3">F. Properti "Image" (Gambar pada PictureBox)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window (PictureBox) → Image → Klik "..."
+Fungsi: Memasukkan file gambar (.jpg, .png, .bmp, .gif)</pre>
+
+<p class="font-bold text-sm mt-3">G. Properti "SizeMode" (Ukuran Gambar)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window (PictureBox) → SizeMode
+Opsi: Normal, StretchImage, AutoSize, Zoom (paling bagus!), CenterImage</pre>
+
+<p class="font-bold text-sm mt-3">H. Properti "Icon" (Ikon Jendela)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window (Form) → Icon
+Fungsi: Mengubah ikon di pojok kiri atas jendela Windows.</pre>
+
+<p class="font-bold text-sm mt-3">I. Properti "Text" pada Form (Judul Jendela)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Letak: Properties Window (Form) → Text
+Fungsi: Mengubah judul jendela aplikasi.
+Contoh: "Color Changer App", "Kalkulator Pangkat Dua"</pre>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">3. Event Handling — Membuat Aplikasi Interaktif</h4>
+<p class="text-muted-foreground"><strong>Event</strong> adalah "pemicu" yang menjalankan kode program ketika pengguna melakukan tindakan tertentu.</p>
+
+<div class="overflow-x-auto mt-2">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Event</th><th class="border border-border p-2 text-left">Pemicu</th><th class="border border-border p-2 text-left">Biasa Digunakan Pada</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2">Click</td><td class="border border-border p-2">Pengguna klik komponen</td><td class="border border-border p-2">Button, PictureBox</td></tr>
+    <tr><td class="border border-border p-2">TextChanged</td><td class="border border-border p-2">Teks berubah</td><td class="border border-border p-2">TextBox</td></tr>
+    <tr><td class="border border-border p-2">Load</td><td class="border border-border p-2">Form pertama kali dibuka</td><td class="border border-border p-2">Form</td></tr>
+    <tr><td class="border border-border p-2">KeyDown</td><td class="border border-border p-2">Tombol keyboard ditekan</td><td class="border border-border p-2">TextBox</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="font-bold text-sm mt-3">Event Click pada Button:</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">private void btnHitung_Click(object sender, EventArgs e)
+{
+    // Kode di sini dijalankan saat tombol diklik
+}</pre>
+
+<p class="font-bold text-sm mt-3">Cara Membuat Event Handler:</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">CARA 1: Double-click pada Button di Designer
+CARA 2: Properties Window → ikon "⚡ Events" → double-click "Click"
+CARA 3: Dropdown di atas Properties Window</pre>
+
+<p class="font-bold text-sm mt-3">Contoh 1: Ubah Teks Label</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">private void btnUbah_Click(object sender, EventArgs e)
+{
+    string inputan = txtInput.Text;
+    lblHasil.Text = inputan;
+}</pre>
+
+<p class="font-bold text-sm mt-3">Contoh 2: Ubah Warna Background Form</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">private void btnMerah_Click(object sender, EventArgs e)
+{
+    this.BackColor = Color.Red;
+}</pre>
+
+<p class="font-bold text-sm mt-3">Contoh 3: Perhitungan Sederhana (Pangkat Dua)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">private void btnHitung_Click(object sender, EventArgs e)
+{
+    int angka = Convert.ToInt32(txtAngka.Text);
+    int hasil = angka * angka;
+    lblHasil.Text = "Hasil: " + hasil.ToString();
+}</pre>
+
+<p class="font-bold text-sm mt-3">Contoh 4: Logika If-Else (Cek Jawaban)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">private void btnCek_Click(object sender, EventArgs e)
+{
+    if (txtJawaban.Text == "Gajah")
+    {
+        lblStatus.Text = "Jawaban Anda Benar!";
+        lblStatus.ForeColor = Color.Green;
+    }
+    else
+    {
+        lblStatus.Text = "Jawaban Salah, Coba Lagi!";
+        lblStatus.ForeColor = Color.Red;
+    }
+}</pre>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">4. Kode Dasar C# yang Sering Digunakan</h4>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">// Konversi &amp; Operasi Data
+string teks = txtInput.Text;
+int angka = Convert.ToInt32(txtAngka.Text);
+string teksAngka = angka.ToString();
+
+// Operasi matematika
+int hasil = angka1 + angka2;  // +
+int hasil = angka1 - angka2;  // -
+int hasil = angka1 * angka2;  // *
+int hasil = angka1 / angka2;  // /
+
+// Mengubah properti saat runtime
+lblHasil.Text = "Nilai baru";
+lblStatus.ForeColor = Color.Green;
+btnHitung.BackColor = Color.Blue;
+this.BackColor = Color.Yellow;
+lblStatus.Visible = true;  // atau false
+txtInput.Width = 200;
+txtInput.Height = 30;
+lblHasil.Font = new Font("Arial", 14, FontStyle.Bold);</pre>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">5. Ringkasan Workflow Membuat Aplikasi GUI</h4>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">TAHAP 1: DRAG-DROP KOMPONEN KE FORM
+- Ambil Label, TextBox, Button, PictureBox dari Toolbox
+- Letakkan di Form sesuai desain
+- Atur ukuran dan posisi
+
+TAHAP 2: ATUR PROPERTIES
+- Ubah Name setiap komponen (lblHasil, txtAngka, btnHitung)
+- Ubah Text (judul, label, tombol)
+- Ubah warna, font, alignment
+- Untuk PictureBox: masukkan Image &amp; atur SizeMode
+
+TAHAP 3: BUAT EVENT HANDLER
+- Double-click pada Button
+- Tulis logika kode
+- Gunakan if-else untuk percabangan
+
+TAHAP 4: TEST &amp; DEBUG
+- Jalankan aplikasi (F5)
+- Coba semua tombol &amp; input
+- Perbaiki error jika ada</pre>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">6. Komponen Lanjutan (Advanced Tools)</h4>
+
+<p class="font-bold text-sm mt-3">A. Alat Pilihan</p>
+<p class="font-bold text-xs mt-2">CheckBox</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Memilih lebih dari satu opsi.
+Properti Kunci: Checked (boolean)
+Contoh: Daftar hobi, filter kategori</pre>
+
+<p class="font-bold text-xs mt-2">RadioButton</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Memilih HANYA SATU opsi dari grup.
+Properti Kunci: Checked, GroupName
+Contoh: Jenis kelamin, metode pembayaran</pre>
+
+<p class="font-bold text-xs mt-2">ComboBox</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Menu drop-down, hemat tempat.
+Properti Kunci: Items, SelectedIndex, SelectedItem
+Contoh: Pilih jurusan, pilih provinsi</pre>
+
+<p class="font-bold text-xs mt-2">ListBox</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Daftar pilihan langsung terlihat.
+Properti Kunci: Items, SelectedIndex
+Contoh: Daftar mata pelajaran</pre>
+
+<p class="font-bold text-xs mt-2">DateTimePicker</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Kalender untuk memilih tanggal.
+Properti Kunci: Value (DateTime), Format
+Contoh: Input tanggal lahir</pre>
+
+<p class="font-bold text-sm mt-3">B. Alat Angka &amp; Indikator</p>
+<p class="font-bold text-xs mt-2">NumericUpDown</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Input angka dengan tombol panah.
+Properti Kunci: Minimum, Maximum, Increment, Value</pre>
+
+<p class="font-bold text-xs mt-2">ProgressBar</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Batang kemajuan proses.
+Properti Kunci: Value (0-100), Step</pre>
+
+<p class="font-bold text-xs mt-2">Timer</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Menjalankan kode tiap selang waktu.
+Properti Kunci: Interval (ms), Enabled
+
+Contoh:
+private void timer1_Tick(object sender, EventArgs e)
+{
+    if (myProgressBar.Value < 100)
+        myProgressBar.Value += 10;
+    else
+    {
+        timer1.Stop();
+        MessageBox.Show("Proses Selesai!");
+    }
+}</pre>
+
+<p class="font-bold text-sm mt-3">C. Alat Navigasi &amp; Informasi</p>
+<p class="font-bold text-xs mt-2">MenuStrip</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Barisan menu di atas jendela (File, Edit, View, Help)</pre>
+
+<p class="font-bold text-xs mt-2">ToolTip</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Teks bantuan saat kursor diarahkan ke komponen.</pre>
+
+<p class="font-bold text-xs mt-2">DataGridView</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Tabel baris &amp; kolom seperti Excel.
+Fitur: AutoGenerateColumns, bisa dari database</pre>
+
+<p class="font-bold text-sm mt-3">D. Alat Visual &amp; Organisasi</p>
+<p class="font-bold text-xs mt-2">GroupBox / Panel</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Fungsi: Mengelompokkan alat agar rapi.
+GroupBox punya border &amp; judul; Panel lebih fleksibel.</pre>
+
+<p class="font-bold text-sm mt-3">E. Layout &amp; Desain: Anchor &amp; Dock</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">Anchor (Jangkar): Mengunci alat ke sisi tertentu.
+Dock (Sandar): Menempelkan alat penuh ke salah satu sisi.</pre>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">7. Kamus Istilah Penting</h4>
+<div class="overflow-x-auto mt-2">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Istilah</th><th class="border border-border p-2 text-left">Arti</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2">Toolbox</td><td class="border border-border p-2">Panel berisi daftar komponen</td></tr>
+    <tr><td class="border border-border p-2">Designer</td><td class="border border-border p-2">Tempat desain visual Form</td></tr>
+    <tr><td class="border border-border p-2">Properties</td><td class="border border-border p-2">Atribut/karakteristik komponen</td></tr>
+    <tr><td class="border border-border p-2">Event</td><td class="border border-border p-2">Pemicu untuk menjalankan kode</td></tr>
+    <tr><td class="border border-border p-2">Handler</td><td class="border border-border p-2">Method yang menangani event</td></tr>
+    <tr><td class="border border-border p-2">Form</td><td class="border border-border p-2">Jendela aplikasi utama</td></tr>
+    <tr><td class="border border-border p-2">Drag-Drop</td><td class="border border-border p-2">Tarik-lepas komponen</td></tr>
+    <tr><td class="border border-border p-2">Runtime</td><td class="border border-border p-2">Saat program berjalan</td></tr>
+    <tr><td class="border border-border p-2">Anchor</td><td class="border border-border p-2">Jangkar posisi komponen</td></tr>
+    <tr><td class="border border-border p-2">Dock</td><td class="border border-border p-2">Sandar ke sisi form</td></tr>
+    <tr><td class="border border-border p-2">Interval</td><td class="border border-border p-2">Jeda waktu Timer (ms)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">8. Studi Kasus: Aplikasi Pendaftaran Siswa</h4>
+
+<p class="font-bold text-sm mt-2">Langkah 1: Data Model (PBO)</p>
+<p class="text-muted-foreground">Buat <code>Siswa.cs</code>:</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">namespace AplikasiPendaftaran
+{
+    public class Siswa
+    {
+        public string Nama { get; set; }
+        public DateTime TanggalLahir { get; set; }
+        public string JenisKelamin { get; set; }
+        public string Jurusan { get; set; }
+
+        public string DapatkanInfo()
+        {
+            return $"Nama: {Nama}\nLahir: {TanggalLahir.ToString("dd MMMM yyyy")}\nGender: {JenisKelamin}\nJurusan: {Jurusan}";
+        }
+    }
+}</pre>
+
+<p class="font-bold text-sm mt-3">Langkah 2: Tools yang Digunakan</p>
+<div class="overflow-x-auto mt-2">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Tools</th><th class="border border-border p-2 text-left">Fungsi</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2">Label</td><td class="border border-border p-2">Judul input</td></tr>
+    <tr><td class="border border-border p-2">TextBox</td><td class="border border-border p-2">Mengisi nama</td></tr>
+    <tr><td class="border border-border p-2">DateTimePicker</td><td class="border border-border p-2">Memilih tanggal lahir</td></tr>
+    <tr><td class="border border-border p-2">RadioButton</td><td class="border border-border p-2">Memilih jenis kelamin</td></tr>
+    <tr><td class="border border-border p-2">ComboBox</td><td class="border border-border p-2">Memilih jurusan</td></tr>
+    <tr><td class="border border-border p-2">Button</td><td class="border border-border p-2">Memproses pendaftaran</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="font-bold text-sm mt-3">Langkah 3: Implementasi Kode Form (Form1.cs)</p>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-1">using System;
+using System.Drawing;
+using System.Windows.Forms;
+
+namespace AplikasiPendaftaran
+{
+    public partial class Form1 : Form
+    {
+        private TextBox txtNama;
+        private DateTimePicker dtpLahir;
+        private RadioButton rbLaki, rbPerempuan;
+        private ComboBox cmbJurusan;
+        private Button btnDaftar;
+
+        public Form1()
+        {
+            this.Text = "Form Pendaftaran Siswa SMK";
+            this.Size = new Size(400, 500);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            InisialisasiKomponen();
+        }
+
+        private void InisialisasiKomponen()
+        {
+            Label lblNama = new Label() { Text = "Nama Lengkap:", Location = new Point(20, 20), AutoSize = true };
+            txtNama = new TextBox() { Location = new Point(20, 45), Width = 300 };
+
+            Label lblLahir = new Label() { Text = "Tanggal Lahir:", Location = new Point(20, 85), AutoSize = true };
+            dtpLahir = new DateTimePicker() { Location = new Point(20, 110), Width = 200 };
+
+            Label lblGender = new Label() { Text = "Jenis Kelamin:", Location = new Point(20, 150), AutoSize = true };
+            rbLaki = new RadioButton() { Text = "Laki-laki", Location = new Point(20, 175), Checked = true };
+            rbPerempuan = new RadioButton() { Text = "Perempuan", Location = new Point(120, 175) };
+
+            Label lblJurusan = new Label() { Text = "Pilih Jurusan:", Location = new Point(20, 215), AutoSize = true };
+            cmbJurusan = new ComboBox() { Location = new Point(20, 240), Width = 200 };
+            cmbJurusan.Items.AddRange(new string[] { "RPL", "TKJ", "Multimedia" });
+            cmbJurusan.SelectedIndex = 0;
+
+            btnDaftar = new Button() { Text = "DAFTARKAN SISWA", Location = new Point(20, 300), Width = 150, Height = 40, BackColor = Color.LightBlue };
+            btnDaftar.Click += new EventHandler(ProsesPendaftaran);
+
+            this.Controls.Add(lblNama);
+            this.Controls.Add(txtNama);
+            this.Controls.Add(lblLahir);
+            this.Controls.Add(dtpLahir);
+            this.Controls.Add(lblGender);
+            this.Controls.Add(rbLaki);
+            this.Controls.Add(rbPerempuan);
+            this.Controls.Add(lblJurusan);
+            this.Controls.Add(cmbJurusan);
+            this.Controls.Add(btnDaftar);
+        }
+
+        private void ProsesPendaftaran(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtNama.Text))
+            {
+                MessageBox.Show("Nama tidak boleh kosong!");
+                return;
+            }
+
+            Siswa siswaBaru = new Siswa();
+            siswaBaru.Nama = txtNama.Text;
+            siswaBaru.TanggalLahir = dtpLahir.Value;
+            siswaBaru.JenisKelamin = rbLaki.Checked ? "Laki-laki" : "Perempuan";
+            siswaBaru.Jurusan = cmbJurusan.SelectedItem.ToString();
+
+            string hasil = siswaBaru.DapatkanInfo();
+            MessageBox.Show(hasil, "Pendaftaran Berhasil!");
+        }
+    }
+}</pre>
+
+<h4 class="font-extrabold text-base mt-5 mb-2">9. Tips Penting: Perbedaan Name vs Text</h4>
+<div class="overflow-x-auto mt-2">
+<table class="w-full text-xs text-muted-foreground border-collapse">
+  <thead><tr class="bg-muted font-bold"><th class="border border-border p-2 text-left">Properti</th><th class="border border-border p-2 text-left">Untuk Siapa?</th><th class="border border-border p-2 text-left">Contoh</th></tr></thead>
+  <tbody>
+    <tr><td class="border border-border p-2">Text</td><td class="border border-border p-2">Mata manusia (dilihat user)</td><td class="border border-border p-2">Tombol bertuliskan "HITUNG"</td></tr>
+    <tr><td class="border border-border p-2">Name</td><td class="border border-border p-2">Kode program (dibaca compiler)</td><td class="border border-border p-2">btnHitung</td></tr>
+  </tbody>
+</table>
+</div>
+<pre class="bg-muted p-3 rounded-xl text-xs leading-relaxed overflow-x-auto mt-2">// BENAR
+btnHitung.Text = "HITUNG";
+
+// SALAH (error!)
+"Hitungan".Text = "HITUNG";</pre>`
       },
       'pabp-buku': {
         title: 'Buku Paket',
