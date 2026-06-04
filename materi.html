@@ -211,10 +211,26 @@
             <h3 class="font-extrabold">Matematika</h3>
           </div>
           <div class="space-y-2 pl-1">
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+            <button onclick="openMateriModal('mtk-matriks')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
               <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">01</div>
               <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Kosong</p>
+                <p class="font-bold text-sm">Matriks</p>
+                <p class="text-xs text-muted-foreground">Ringkasan · Materi</p>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
+            </button>
+            <button onclick="openMateriModal('mtk-transformasi')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">02</div>
+              <div class="flex-1 min-w-0">
+                <p class="font-bold text-sm">Transformasi Geometri</p>
+                <p class="text-xs text-muted-foreground">Ringkasan · Materi</p>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
+            </button>
+            <button onclick="openMateriModal('mtk-polinomial')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">03</div>
+              <div class="flex-1 min-w-0">
+                <p class="font-bold text-sm">Polinomial</p>
                 <p class="text-xs text-muted-foreground">Ringkasan · Materi</p>
               </div>
               <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
@@ -1792,6 +1808,188 @@ btnHitung.Text = "HITUNG";
   <p class="text-xs text-muted-foreground mt-2">File tersedia: Buku PAI -XI_Kurmer.pdf &amp; KUNCI JAWABAN PAI BAB 6-10.pdf</p>
 </div>
 `
+      },
+      'mtk-matriks': {
+        title: 'Matriks',
+        content: `<h4 class="font-extrabold text-base mb-2">Operasi pada Matriks</h4>
+<p class="text-muted-foreground mb-2">Syarat: ordonya harus sama!</p>
+<p class="font-bold text-sm mb-1">Diketahui:</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+B = [1  4]    C = [-2  0]
+    [2  3]        [ 4  1]</div>
+<p class="font-bold text-sm mb-1">Tentukan:</p>
+<p class="text-muted-foreground">a. B + C</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+B + C = [1+(-2)  4+0]  =  [-1  4]
+        [2+4     3+1]     [ 6  4]</div>
+<p class="text-muted-foreground">b. C - B</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+C - B = [-2-1  0-4]  =  [-3  -4]
+        [4-2   1-3]     [ 2  -2]</div>
+<p class="text-muted-foreground">c. CB</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+CB = [-2  0] [1  4]  =  [-2·1+0·2  -2·4+0·3]  =  [-2  -8]
+     [ 4  1] [2  3]     [ 4·1+1·2   4·4+1·3]     [ 6  19]</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Determinan</h4>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+A = [8  -1]
+    [3   2]
+
+|A| = 8·2 - (-1)·3 = 16 + 3 = 19</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Invers</h4>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+A⁻¹ = (1/|A|) × [ d  -b]
+                [-c   a]</div>
+<p class="font-bold text-sm mb-1">Contoh:</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+P = [7  2]
+    [3  1]
+
+|P| = 7·1 - 3·2 = 7 - 6 = 1
+
+P⁻¹ = (1/1) × [ 1  -2]  =  [ 1  -2]
+              [-3   7]      [-3   7]</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Persamaan Matriks</h4>
+<p class="font-bold text-sm mb-1">Bentuk AX = B</p>
+<p class="text-muted-foreground mb-1">Rumus: <span class="font-mono font-bold">X = A⁻¹B</span></p>
+<p class="text-xs text-muted-foreground mb-3">Catatan: Matriks A di sisi kiri X, maka A⁻¹ juga di sisi kiri B.</p>
+<p class="font-bold text-sm mb-1">Bentuk XA = B</p>
+<p class="text-muted-foreground mb-1">Rumus: <span class="font-mono font-bold">X = BA⁻¹</span></p>
+<p class="text-xs text-muted-foreground mb-3">Catatan: Matriks A di sisi kanan X, maka A⁻¹ di sisi kanan B.</p>
+<p class="font-bold text-sm mb-1">Contoh:</p>
+<p class="text-muted-foreground mb-1">Tentukan matriks K, jika KA = C</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+A = [2  1]    C = [4  5]
+    [7  3]        [1  3]
+
+KA = C  →  K = C · A⁻¹
+
+|A| = 2·3 - 7·1 = 6 - 7 = -1
+
+A⁻¹ = (1/-1) × [ 3  -1]  =  [-3   1]
+               [-7   2]      [ 7  -2]
+
+K = C · A⁻¹ = [4  5] [-3  1]  =  [4(-3)+5(7)   4(1)+5(-2)]
+              [1  3] [ 7 -2]     [1(-3)+3(7)   1(1)+3(-2)]
+
+  = [23  -6]
+    [18  -5]</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Aplikasi Matriks pada SPL</h4>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+3x + 2y = 4
+2x +  y = 2
+
+[3  2] [x]  =  [4]
+[2  1] [y]     [2]
+
+(Bentuk AB = C  →  B = A⁻¹C)
+
+|A| = 3·1 - 2·2 = 3 - 4 = -1
+
+A⁻¹ = (1/-1) × [ 1  -2]  =  [-1   2]
+               [-2   3]      [ 2  -3]
+
+B = A⁻¹C = [-1  2] [4]  =  [-4+4 ]  =  [0]
+           [ 2 -3] [2]     [8+(-6)]     [2]
+
+Maka x = 0, y = 2</div>`
+      },
+      'mtk-transformasi': {
+        title: 'Transformasi Geometri',
+        content: `<h4 class="font-extrabold text-base mb-2">Translasi</h4>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+A(x,y) ──T(a,b)──→  A'(x+a, y+b)</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Refleksi (Pencerminan)</h4>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap">
+• Sumbu x:      A(x,y) → A'(x, -y)
+• Sumbu y:      A(x,y) → A'(-x, y)
+• Garis y = x:  A(x,y) → A'(y, x)
+• Garis y = -x: A(x,y) → A'(-y, -x)
+• Garis x = h:  A(x,y) → A'(2h - x, y)
+• Garis y = h:  A(x,y) → A'(x, 2h - y)
+• Titik (0,0):  A(x,y) → A'(-x, -y)
+• Titik (a,b):  A(x,y) → A'(2a - x, 2b - y)</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Rotasi</h4>
+<p class="font-bold text-sm mb-1">Pusat (0,0):</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+90°   (CCW):  A(x,y) → A'(-y, x)
+180°:         A(x,y) → A'(-x, -y)
+270°  (CCW):  A(x,y) → A'(y, -x)</div>
+<p class="font-bold text-sm mb-1">Pusat (a,b):</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+90°   (CCW):  A(x,y) → A'(-(y-b)+a, (x-a)+b)
+180°:         A(x,y) → A'(-(x-a)+a, -(y-b)+b)
+270°  (CCW):  A(x,y) → A'((y-b)+a, -(x-a)+b)</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Dilatasi</h4>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap">
+• Pusat (0,0):  A(x,y) ──k──→  A'(k·x, k·y)
+• Pusat (a,b):  A(x,y) ──k──→  A'(k(x-a)+a, k(y-b)+b)</div>`
+      },
+      'mtk-polinomial': {
+        title: 'Polinomial',
+        content: `<h4 class="font-extrabold text-base mb-2">Bentuk Umum</h4>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+8x⁶ + 3x⁴ - 2x³ + 2x² - 7
+
+Derajat: 6
+Koefisien x⁶ = 8, x⁵ = 0, x⁴ = 3, x³ = -2, x² = 2, x = 0
+Konstanta: -7</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Penjumlahan &amp; Pengurangan</h4>
+<p class="font-bold text-sm mb-1">Contoh:</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+f(x) = 5x³ - 2x² + 4
+g(x) = 7x³ + 4x - 5
+
+f(x) + g(x) = 5x³-2x²+4 + 7x³+4x-5
+            = 12x³ - 2x² + 4x - 1
+
+f(x) - g(x) = 5x³-2x²+4 - (7x³+4x-5)
+            = -2x³ - 2x² - 4x + 9</div>
+
+<p class="font-bold text-sm mb-1">Sederhanakan:</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+g(x) = (8x³ + 4x²)(3x² - 2)
+     = 24x⁵ - 16x³ + 12x⁴ - 8x²
+     = 24x⁵ + 12x⁴ - 16x³ - 8x²</div>
+
+<h4 class="font-extrabold text-base mt-4 mb-2">Pembagian Polinomial</h4>
+<p class="text-muted-foreground mb-2">Tentukan hasil bagi dan sisa dari <span class="font-mono">6x⁴ - 2x³ + 5x² - 7x + 4</span> dibagi <span class="font-mono">x - 2</span></p>
+
+<p class="font-bold text-sm mb-1">1. Cara Bersusun (Porogapit)</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+x - 2 │ 6x⁴ - 2x³ + 5x² - 7x + 4
+      │ 6x⁴ - 12x³
+      ─────────────────────────
+          10x³ + 5x² - 7x + 4
+          10x³ - 20x²
+          ─────────────
+               25x² - 7x + 4
+               25x² - 50x
+               ───────────
+                    43x + 4
+                    43x - 86
+                    ────────
+                         90  (Sisa)
+
+Hasil bagi: 6x³ + 10x² + 25x + 43</div>
+
+<p class="font-bold text-sm mb-1">2. Cara Horner</p>
+<div class="bg-muted/40 rounded-xl p-3 font-mono text-sm leading-relaxed whitespace-pre-wrap mb-3">
+  2 │  6   -2    5   -7    4
+    │     12   20   50   86
+    ──────────────────────────
+      6   10   25   43 │ 90
+
+Hasil bagi: 6x³ + 10x² + 25x + 43
+Sisa: 90</div>`
       }
     };
 
