@@ -229,6 +229,17 @@
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
     </div>
+    <!-- Language Selector for Cloud -->
+    <div id="cloud-lang-switcher" class="px-5 py-2.5 border-b border-border bg-muted/20 flex items-center justify-between hidden shrink-0">
+      <div class="flex items-center gap-2">
+        <i data-lucide="languages" class="w-4 h-4 text-primary"></i>
+        <span class="text-xs font-bold text-muted-foreground">Bahasa / Language</span>
+      </div>
+      <div class="flex bg-muted dark:bg-[#121016] rounded-xl p-0.5 border border-border/40 gap-0.5 shrink-0">
+        <button onclick="setCloudLang('id')" id="btn-cloud-lang-id" class="px-3 py-1 text-xs font-bold rounded-lg transition-all bg-primary text-primary-foreground shadow-sm">ID</button>
+        <button onclick="setCloudLang('en')" id="btn-cloud-lang-en" class="px-3 py-1 text-xs font-bold rounded-lg transition-all text-muted-foreground">EN</button>
+      </div>
+    </div>
     <div id="chapter-list" class="px-5 py-4 space-y-2 overflow-y-auto max-h-[70vh] pb-10">
     </div>
   </div>
@@ -297,6 +308,39 @@
       ]},
     };
 
+    let cloudLang = 'en';
+
+    function setCloudLang(lang) {
+      cloudLang = lang;
+      const btnId = document.getElementById('btn-cloud-lang-id');
+      const btnEn = document.getElementById('btn-cloud-lang-en');
+      if (lang === 'id') {
+        btnId.className = 'px-3 py-1 text-xs font-bold rounded-lg transition-all bg-primary text-primary-foreground shadow-sm';
+        btnEn.className = 'px-3 py-1 text-xs font-bold rounded-lg transition-all text-muted-foreground';
+      } else {
+        btnId.className = 'px-3 py-1 text-xs font-bold rounded-lg transition-all text-muted-foreground';
+        btnEn.className = 'px-3 py-1 text-xs font-bold rounded-lg transition-all bg-primary text-primary-foreground shadow-sm';
+      }
+      // regenerate chapter list with updated lang
+      const modalTitle = document.getElementById('chapter-modal-title').textContent;
+      const subjectEntry = Object.values(subjects).find(s => s.name === modalTitle);
+      if (subjectEntry) {
+        const list = document.getElementById('chapter-list');
+        list.innerHTML = subjectEntry.chapters.map((ch, i) => `
+          <a href="quiz-play.html?exam=${ch.id}${subjectEntry.name === 'Cloud' ? '&lang=' + cloudLang : ''}"
+             class="flex items-center gap-4 p-4 bg-background rounded-2xl border border-border hover:border-primary/30 hover:shadow-sm transition-all active:scale-[0.98]">
+            <div class="w-10 h-10 rounded-xl bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">${String(i + 1).padStart(2, '0')}</div>
+            <div class="flex-1 min-w-0">
+              <p class="font-extrabold text-sm">${ch.label}</p>
+              <p class="text-xs text-muted-foreground">${ch.soal || 5} Soal</p>
+            </div>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground shrink-0"></i>
+          </a>
+        `).join('');
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+
     function openChapterModal(subjectId) {
       const sub = subjects[subjectId];
       if (!sub) return;
@@ -304,9 +348,19 @@
       document.getElementById('chapter-modal-title').textContent = sub.name;
       document.getElementById('chapter-modal-sub').textContent = sub.fullName;
 
+      // Show/hide cloud language switcher
+      const switcher = document.getElementById('cloud-lang-switcher');
+      if (switcher) {
+        if (subjectId === 'cloud') {
+          switcher.classList.remove('hidden');
+        } else {
+          switcher.classList.add('hidden');
+        }
+      }
+
       const list = document.getElementById('chapter-list');
       list.innerHTML = sub.chapters.map((ch, i) => `
-        <a href="quiz-play.html?exam=${ch.id}"
+        <a href="quiz-play.html?exam=${ch.id}${subjectId === 'cloud' ? '&lang=' + cloudLang : ''}"
            class="flex items-center gap-4 p-4 bg-background rounded-2xl border border-border hover:border-primary/30 hover:shadow-sm transition-all active:scale-[0.98]">
           <div class="w-10 h-10 rounded-xl bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">${String(i + 1).padStart(2, '0')}</div>
           <div class="flex-1 min-w-0">
