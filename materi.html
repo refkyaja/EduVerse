@@ -268,14 +268,38 @@
         <section class="space-y-2">
           <div class="flex items-center gap-3">
             <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-sky-400 to-indigo-500 grid place-items-center text-white font-extrabold text-[10px] shadow-md">CLOUD</div>
-            <h3 class="font-extrabold">Cloud</h3>
+            <h3 class="font-extrabold">Cloud Computing</h3>
           </div>
           <div class="space-y-2 pl-1">
-            <button class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+            <button onclick="openMateriModal('cloud-modul3-6')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
               <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">01</div>
               <div class="flex-1 min-w-0">
-                <p class="font-bold text-sm">Kosong</p>
-                <p class="text-xs text-muted-foreground">Ringkasan · Materi</p>
+                <p class="font-bold text-sm">Modul 3–6</p>
+                <p class="text-xs text-muted-foreground">AWS Core Services (IAM, S3, EC2, RDS, DynamoDB)</p>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
+            </button>
+            <button onclick="openMateriModal('cloud-modul7-10')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">02</div>
+              <div class="flex-1 min-w-0">
+                <p class="font-bold text-sm">Modul 7–10</p>
+                <p class="text-xs text-muted-foreground">AWS Core Services & Security</p>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
+            </button>
+            <button onclick="openMateriModal('cloud-modul11-13')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">03</div>
+              <div class="flex-1 min-w-0">
+                <p class="font-bold text-sm">Modul 11–13</p>
+                <p class="text-xs text-muted-foreground">AWS Architecture & Integration</p>
+              </div>
+              <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
+            </button>
+            <button onclick="openMateriModal('cloud-modul14-16')" class="w-full text-left bg-card border border-border rounded-2xl p-4 flex items-center gap-3 hover:border-primary/30 hover:shadow-md transition-all active:scale-[0.98]">
+              <div class="w-9 h-9 rounded-lg bg-muted grid place-items-center text-xs font-extrabold text-muted-foreground">04</div>
+              <div class="flex-1 min-w-0">
+                <p class="font-bold text-sm">Modul 14–16</p>
+                <p class="text-xs text-muted-foreground">AWS Serverless & Disaster Recovery</p>
               </div>
               <i data-lucide="chevron-right" class="w-4 h-4 text-muted-foreground"></i>
             </button>
@@ -354,6 +378,17 @@
       <button onclick="closeMateriModal()" class="w-9 h-9 rounded-xl bg-muted flex items-center justify-center hover:bg-muted/80 transition-colors">
         <i data-lucide="x" class="w-5 h-5"></i>
       </button>
+    </div>
+    <!-- Language Selector Bar -->
+    <div id="lang-switcher" class="px-5 py-2.5 border-b border-border bg-muted/20 flex items-center justify-between hidden shrink-0">
+      <div class="flex items-center gap-2">
+        <i data-lucide="languages" class="w-4 h-4 text-primary"></i>
+        <span class="text-xs font-bold text-muted-foreground">Bahasa / Language</span>
+      </div>
+      <div class="flex bg-muted dark:bg-[#121016] rounded-xl p-0.5 border border-border/40 gap-0.5 shrink-0">
+        <button onclick="setMateriLanguage('id')" id="btn-lang-id" class="px-3 py-1 text-xs font-bold rounded-lg transition-all bg-primary text-primary-foreground shadow-sm">ID</button>
+        <button onclick="setMateriLanguage('en')" id="btn-lang-en" class="px-3 py-1 text-xs font-bold rounded-lg transition-all text-muted-foreground">EN</button>
+      </div>
     </div>
     <div id="materi-modal-body" class="px-5 py-4 space-y-4 overflow-y-auto pb-10 text-sm leading-relaxed" style="max-height:55vh;transition:max-height 0.4s cubic-bezier(0.32,0.72,0,1);">
     </div>
@@ -1990,14 +2025,392 @@ Hasil bagi: 6x³ + 10x² + 25x + 43</div>
 
 Hasil bagi: 6x³ + 10x² + 25x + 43
 Sisa: 90</div>`
+      },
+      'cloud-modul3-6': {
+        title: 'Modul 3–6 (AWS Core Services)',
+        contentId: `<h4 class="font-extrabold text-base mb-2">1. AWS Identity and Access Management (IAM)</h4>
+<p class="text-muted-foreground mb-4">Layanan AWS yang digunakan untuk mengatur siapa yang dapat mengakses sumber daya AWS dan apa saja yang dapat mereka lakukan.</p>
+<p class="font-bold text-sm mb-1">Komponen Utama IAM:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>IAM User:</strong> Untuk individu yang membutuhkan akses permanen ke AWS (misalnya CTO, Administrator sistem, Developer tetap).</li>
+  <li><strong>IAM Group:</strong> Sekumpulan IAM User yang memiliki izin yang sama (misalnya Tim Developer, Tim Support, Tim Security). Keuntungan: Tidak perlu memberikan izin satu per satu, cukup tambahkan user ke grup.</li>
+  <li><strong>IAM Role:</strong> Untuk memberikan akses sementara ke sumber daya AWS. Digunakan oleh vendor eksternal, kontraktor, EC2 yang mengakses S3, atau cross-account access.</li>
+</ul>
+<p class="font-bold text-sm mb-1">IAM Policy Evaluation (Logika Evaluasi):</p>
+<p class="text-muted-foreground mb-2">AWS mengevaluasi izin dengan urutan:</p>
+<ol class="list-decimal pl-5 space-y-1 text-muted-foreground mb-4">
+  <li><strong>Explicit Deny:</strong> Jika ada aturan menolak (Deny) secara eksplisit, akses langsung ditolak.</li>
+  <li><strong>Explicit Allow:</strong> Jika ada aturan mengizinkan (Allow) secara eksplisit, akses diberikan.</li>
+  <li><strong>Implicit Deny:</strong> Jika tidak ada aturan yang mengizinkan maupun menolak, akses otomatis ditolak secara default.</li>
+</ol>
+<p class="font-bold text-sm mb-1">Jenis Policy:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-6">
+  <li><strong>Identity Policy:</strong> Ditempel pada user, group, atau role.</li>
+  <li><strong>Resource Policy:</strong> Ditempel langsung pada resource seperti S3 Bucket, SQS, atau SNS.</li>
+  <li><strong>Permission Boundary:</strong> Membatasi izin maksimum yang dapat diberikan kepada suatu identitas.</li>
+  <li><strong>Service Control Policy (SCP):</strong> Digunakan pada AWS Organizations untuk membatasi izin di seluruh akun AWS.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">2. Amazon S3 (Simple Storage Service)</h4>
+<p class="text-muted-foreground mb-4">Layanan penyimpanan objek (object storage) yang sangat tahan lama, aman, dan skalabel. S3 digunakan untuk menyimpan file, backup, data lake, serta hosting website statis.</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-6">
+  <li><strong>Static Website Hosting:</strong> S3 dapat meng-host file statis seperti HTML, CSS, JavaScript, dan gambar. S3 <em>tidak digunakan</em> untuk menyimpan password, network key, atau data sensitif secara publik.</li>
+  <li><strong>S3 Versioning:</strong> Menyimpan beberapa versi file untuk memulihkan file lama, melindungi dari overwrite, dan mencegah penghapusan yang tidak sengaja.</li>
+  <li><strong>Bucket Policy:</strong> Mengatur hak akses di level bucket. Sangat cocok untuk cross-account access atau pemberian izin jangka panjang.</li>
+  <li><strong>Storage Classes (Kelas Penyimpanan):</strong>
+    <ul class="list-circle pl-5 mt-1 space-y-1">
+      <li><em>S3 Standard:</em> Untuk data yang sering diakses (akses cepat, biaya storage standar).</li>
+      <li><em>S3 Standard-IA (Infrequent Access):</em> Untuk data yang jarang diakses tapi butuh diakses cepat saat dibutuhkan (biaya storage lebih murah, ada biaya pengambilan data).</li>
+      <li><em>Glacier Instant Retrieval:</em> Arsip data jangka panjang dengan biaya sangat murah dan pengambilan instan.</li>
+    </ul>
+  </li>
+  <li><strong>Lifecycle Policy:</strong> Otomatis memindahkan data antar kelas penyimpanan (misal: 30 hari &rarr; Standard-IA, 1 tahun &rarr; Glacier, 10 tahun &rarr; Delete).</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">3. Amazon EC2 dan Storage</h4>
+<p class="text-muted-foreground mb-4">Amazon EC2 (Elastic Compute Cloud) menyediakan virtual server di AWS.</p>
+<p class="font-bold text-sm mb-1">Tipe Instance EC2:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>General Purpose:</strong> Keseimbangan daya CPU, memori (RAM), dan jaringan.</li>
+  <li><strong>Compute Optimized:</strong> CPU tinggi. Cocok untuk Batch Processing dan Scientific Computing.</li>
+  <li><strong>Memory Optimized:</strong> RAM tinggi. Cocok untuk in-memory database (seperti Redis), caching, dan database skala besar.</li>
+  <li><strong>Accelerated Computing:</strong> Menggunakan akselerator perangkat keras (GPU). Cocok untuk Machine Learning dan rendering video.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Penyimpanan (Storage) EC2:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Amazon EBS (Elastic Block Store):</strong> Block storage persisten untuk EC2. Data tetap aman saat instance di-stop. Sangat cocok untuk database.</li>
+  <li><strong>Amazon EFS (Elastic File System):</strong> Shared file storage yang dapat diakses oleh ratusan EC2 secara bersamaan. Sangat cocok untuk Linux.</li>
+  <li><strong>Instance Store:</strong> Storage sementara (ephemeral). Data akan hilang secara permanen jika instance di-stop.</li>
+</ul>
+<p class="font-bold text-sm mb-1">EC2 Pricing (Skema Harga):</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-6">
+  <li><strong>On-Demand:</strong> Bayar sesuai pemakaian per detik/menit tanpa komitmen jangka panjang.</li>
+  <li><strong>Spot Instance:</strong> Diskon hingga 90% memanfaatkan kapasitas AWS yang tidak terpakai. Dapat dihentikan AWS kapan saja (cocok untuk workload non-critical).</li>
+  <li><strong>Savings Plans:</strong> Diskon besar untuk komitmen penggunaan jangka panjang (1-3 tahun). Lebih fleksibel dibanding Reserved Instance.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">4. Amazon RDS, Aurora, DynamoDB</h4>
+<p class="font-bold text-sm mb-1">Amazon RDS (Relational Database Service):</p>
+<p class="text-muted-foreground mb-2">Layanan database relasional terkelola penuh (managed SQL) yang mendukung MySQL, PostgreSQL, MariaDB, Oracle, dan SQL Server.</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Read Replica:</strong> Salinan database yang digunakan khusus untuk membaca data guna mengurangi beban database utama.</li>
+  <li><strong>Multi-AZ (Availability Zone):</strong> Sinkronisasi data ke zona lain untuk High Availability dan Disaster Recovery.</li>
+  <li><strong>Snapshot:</strong> Backup manual yang tetap tersedia meskipun database utama telah dihapus.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Amazon Aurora:</p>
+<p class="text-muted-foreground mb-4">Database relasional cloud-native AWS yang kompatibel dengan MySQL dan PostgreSQL (kecepatan hingga 5x MySQL standar). Memiliki fitur Auto Scaling, Read Replica, dan High Availability. <em>Aurora Serverless</em> dapat melakukan scale secara otomatis dan pause saat tidak digunakan.</p>
+<p class="font-bold text-sm mb-1">Database Migration:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>AWS DMS (Database Migration Service):</strong> Digunakan untuk memigrasikan database ke AWS dengan downtime minimal.</li>
+  <li><strong>AWS SCT (Schema Conversion Tool):</strong> Mengubah skema database komersial (seperti Oracle) menjadi Aurora atau PostgreSQL.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Amazon DynamoDB:</p>
+<p class="text-muted-foreground mb-4">Database NoSQL terkelola penuh buatan AWS yang sangat cepat (millisecond latency), serverless, dan auto-scaling secara otomatis.</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground">
+  <li><strong>Global Secondary Index (GSI):</strong> Memungkinkan query data menggunakan atribut lain di luar partition key utama.</li>
+  <li><strong>RCU (Read Capacity Unit):</strong> Kapasitas baca DynamoDB yang harus ditingkatkan jika lalu lintas query terlalu tinggi.</li>
+</ul>`,
+        contentEn: `<h4 class="font-extrabold text-base mb-2">1. AWS Identity and Access Management (IAM)</h4>
+<p class="text-muted-foreground mb-4">AWS Identity and Access Management (IAM) is a service used to control who can access AWS resources and what actions they can perform.</p>
+<p class="font-bold text-sm mb-1">Main IAM Identities:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>IAM User:</strong> Permanent identity for an individual (e.g. CTO, system administrator, permanent developer).</li>
+  <li><strong>IAM Group:</strong> Collection of users sharing the same permissions (e.g. Developer Team, Support Team). Benefits: Simpler management without assigning permissions to each user individually.</li>
+  <li><strong>IAM Role:</strong> Temporary identity used by services (e.g. EC2 accessing S3), applications, or external users/contractors (cross-account access).</li>
+</ul>
+<p class="font-bold text-sm mb-1">Policy Evaluation Logic:</p>
+<p class="text-muted-foreground mb-2">AWS evaluates permissions in this order:</p>
+<ol class="list-decimal pl-5 space-y-1 text-muted-foreground mb-4">
+  <li><strong>Explicit Deny:</strong> If any policy denies access, it is immediately denied.</li>
+  <li><strong>Explicit Allow:</strong> If a policy allows access (and no deny exists), it is allowed.</li>
+  <li><strong>Implicit Deny:</strong> If no explicit allow exists, it is denied by default.</li>
+</ol>
+<p class="font-bold text-sm mb-1">Permission Policies:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-6">
+  <li><strong>Identity Policies:</strong> Attached to users, groups, or roles.</li>
+  <li><strong>Resource Policies:</strong> Attached directly to resources (e.g. S3 Bucket, SQS, SNS).</li>
+  <li><strong>Permission Boundaries:</strong> Limits the maximum permissions that can be granted to an identity.</li>
+  <li><strong>Service Control Policies (SCPs):</strong> Used in AWS Organizations to restrict permissions across entire accounts.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">2. Amazon S3 (Simple Storage Service)</h4>
+<p class="text-muted-foreground mb-4">AWS's object storage service which is highly durable, secure, and scalable. Used for backups, archiving, data lakes, and hosting static websites.</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-6">
+  <li><strong>Static Website Hosting:</strong> Hosts static files such as HTML, CSS, JavaScript, and images. <em>Note:</em> Do not store passwords, network keys, or sensitive data publicly.</li>
+  <li><strong>Versioning:</strong> Stores multiple versions of objects to restore old files, protect against overwrites, and accidental deletions.</li>
+  <li><strong>Bucket Policies:</strong> Grant permissions at the bucket level, suitable for cross-account access or long-term permissions.</li>
+  <li><strong>Storage Classes:</strong>
+    <ul class="list-circle pl-5 mt-1 space-y-1">
+      <li><em>Standard:</em> Frequently accessed data.</li>
+      <li><em>Standard-IA (Infrequent Access):</em> Infrequently accessed but requires rapid access when needed (cheaper storage, retrieval fee).</li>
+      <li><em>Glacier Instant Retrieval:</em> Archiving data at the lowest cost with instant retrieval.</li>
+    </ul>
+  </li>
+  <li><strong>Lifecycle Policies:</strong> Automatically move data between storage classes or delete them (e.g., 30 days &rarr; Standard-IA, 1 year &rarr; Glacier, 10 years &rarr; Delete).</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">3. Amazon EC2 and Storage</h4>
+<p class="text-muted-foreground mb-4">Amazon EC2 provides virtual servers in AWS.</p>
+<p class="font-bold text-sm mb-1">Instance Families:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>General Purpose:</strong> Balance of CPU, memory (RAM), and network.</li>
+  <li><strong>Compute Optimized:</strong> High CPU. Ideal for Batch Processing and Scientific Computing.</li>
+  <li><strong>Memory Optimized:</strong> High RAM. Ideal for in-memory databases (e.g. Redis), caching, and large databases.</li>
+  <li><strong>Accelerated Computing:</strong> GPU-based instances. Ideal for Machine Learning and video rendering.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Storage Solutions:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>EBS (Elastic Block Store):</strong> Persistent block storage for EC2. Data remains after instance stops. Best for database workloads.</li>
+  <li><strong>EFS (Elastic File System):</strong> Shared file storage for Linux workloads, accessible by hundreds of instances simultaneously.</li>
+  <li><strong>Instance Store:</strong> Temporary (ephemeral) local storage. Data is lost permanently when the instance is stopped.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Pricing Options:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-6">
+  <li><strong>On-Demand:</strong> Pay-as-you-go per second/minute with no long-term commitment.</li>
+  <li><strong>Spot Instances:</strong> Up to 90% discount using spare AWS capacity. Can be interrupted by AWS at any time.</li>
+  <li><strong>Savings Plans:</strong> Deep discounts in exchange for a commitment (1 or 3 years). Highly flexible across regions and instance families.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">4. Amazon RDS, Aurora, DynamoDB</h4>
+<p class="font-bold text-sm mb-1">Amazon RDS (Relational Database Service):</p>
+<p class="text-muted-foreground mb-2">Managed relational database service supporting MySQL, PostgreSQL, MariaDB, Oracle, and SQL Server.</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Read Replicas:</strong> Offloads database read queries to reduce load on the primary DB instance.</li>
+  <li><strong>Multi-AZ:</strong> Synchronous database replication to another Availability Zone for High Availability and Disaster Recovery.</li>
+  <li><strong>Snapshots:</strong> Manual backups that remain available even after deleting the DB instance.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Amazon Aurora:</p>
+<p class="text-muted-foreground mb-4">AWS's cloud-native relational database compatible with MySQL and PostgreSQL (up to 5x faster). Features auto-scaling, read replicas, and high availability. <em>Aurora Serverless</em> automatically scales and pauses when inactive.</p>
+<p class="font-bold text-sm mb-1">Migration Services:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>AWS DMS (Database Migration Service):</strong> Migrates databases to AWS with minimal downtime.</li>
+  <li><strong>AWS SCT (Schema Conversion Tool):</strong> Converts commercial database schemas (e.g. Oracle) to Aurora or PostgreSQL.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Amazon DynamoDB:</p>
+<p class="text-muted-foreground mb-4">Fully managed NoSQL database service with millisecond latency, serverless, and automatic scaling.</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground">
+  <li><strong>Global Secondary Index (GSI):</strong> Allows queries using alternative attributes rather than the primary partition key.</li>
+  <li><strong>RCU (Read Capacity Unit):</strong> Provisioned read capacity that must be scaled up if read traffic is high.</li>
+</ul>`
+      },
+      'cloud-modul7-10': {
+        title: 'Modul 7–10 (AWS Core Services & Security)',
+        contentId: `<h4 class="font-extrabold text-base mb-2">1. Amazon VPC (Virtual Private Cloud)</h4>
+<p class="text-muted-foreground mb-4">Amazon VPC adalah layanan yang memungkinkan kita membuat jaringan virtual pribadi di AWS. VPC dapat dianggap sebagai "data center virtual" yang sepenuhnya kita kontrol.</p>
+<p class="font-bold text-sm mb-1">Komponen Utama VPC:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>VPC:</strong> Jaringan virtual utama tempat seluruh resource AWS berjalan.</li>
+  <li><strong>Public Subnet:</strong> Subnet yang memiliki akses langsung ke internet melalui Internet Gateway (IGW). Digunakan untuk Web Server, Load Balancer, dan Bastion Host.</li>
+  <li><strong>Private Subnet:</strong> Subnet yang tidak dapat diakses langsung dari internet. Biasanya digunakan untuk Database, Internal App Server, dan Backend Service.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Akses Jaringan & Keamanan:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Internet Gateway (IGW):</strong> Memungkinkan resource di VPC terhubung ke internet untuk traffic masuk (inbound) dan keluar (outbound).</li>
+  <li><strong>NAT Gateway:</strong> Mengizinkan resource di Private Subnet mengakses internet (outbound) secara aman untuk update system tanpa menerima koneksi masuk (inbound) dari internet.</li>
+  <li><strong>NAT Instance vs NAT Gateway:</strong> NAT Gateway direkomendasikan karena merupakan managed service AWS, highly available, dan tidak perlu dikelola manual (no patching).</li>
+  <li><strong>VPC Flow Logs:</strong> Layanan untuk merekam dan memantau lalu lintas jaringan di VPC. Sangat penting untuk audit keamanan dan troubleshooting koneksi terblokir atau timeout.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">2. Security Group dan Network ACL</h4>
+<p class="text-muted-foreground mb-4">AWS menyediakan dua lapisan firewall untuk melindungi jaringan virtual:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Security Group (SG):</strong> Firewall di level instance (EC2). Bersifat <strong>Stateful</strong> (jika request masuk diizinkan, response otomatis diizinkan). Hanya mendukung aturan ALLOW.</li>
+  <li><strong>Network ACL (NACL):</strong> Firewall di level subnet. Bersifat <strong>Stateless</strong> (harus mengonfigurasi aturan inbound dan outbound secara terpisah). Mendukung aturan ALLOW dan DENY, serta dievaluasi berurutan sesuai nomor rule. Sangat cocok untuk memblokir IP berbahaya secara eksplisit.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">3. Koneksi Antar Jaringan AWS</h4>
+<p class="text-muted-foreground mb-4">Metode untuk menghubungkan VPC dengan jaringan lain:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>VPC Peering:</strong> Koneksi point-to-point langsung antara dua VPC dengan latensi sangat rendah dan biaya murah. Tidak cocok untuk jaringan yang sangat besar.</li>
+  <li><strong>AWS Transit Gateway:</strong> Hub jaringan pusat untuk menghubungkan banyak VPC dan jaringan on-premises secara terpusat (skalabell dan mudah dikelola).</li>
+  <li><strong>AWS PrivateLink:</strong> Menghubungkan VPC secara privat ke layanan tertentu tanpa melalui internet gateway, bahkan mendukung IP address yang tumpang tindih (overlapping).</li>
+  <li><strong>Site-to-Site VPN:</strong> Koneksi aman terenkripsi (IPsec VPN Tunnel) antara kantor on-premises dan AWS melalui internet publik.</li>
+  <li><strong>AWS Direct Connect:</strong> Koneksi fisik privat langsung dari data center ke AWS tanpa melalui internet, menawarkan kestabilan tinggi dan latensi rendah.</li>
+  <li><strong>Transit Gateway Peering:</strong> Menghubungkan Transit Gateway antar-Region untuk arsitektur multi-region dan disaster recovery.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">4. AWS Identity Center &amp; Amazon Cognito</h4>
+<p class="font-bold text-sm mb-1">AWS IAM Identity Center (workforce identity):</p>
+<p class="text-muted-foreground mb-2">Layanan Single Sign-On (SSO) terpusat untuk mempermudah karyawan mengakses multi-account AWS dan aplikasi bisnis (integrasi dengan Active Directory).</p>
+<p class="font-bold text-sm mb-1">Amazon Cognito (customer identity):</p>
+<p class="text-muted-foreground mb-2">Layanan untuk autentikasi end-user aplikasi mobile/web. Mendukung pendaftaran akun, login, dan Social Login (Google, Facebook, Apple).</p>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">5. AWS Encryption dan Security Services</h4>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>AWS KMS:</strong> Mengelola kunci enkripsi (KMS key) untuk enkripsi data secara terpusat di berbagai layanan AWS (S3, EBS, RDS, dll).</li>
+  <li><strong>Amazon EBS Encryption:</strong> Menyediakan enkripsi disk-level secara otomatis untuk volume EBS, snapshot, dan data-at-rest.</li>
+  <li><strong>Amazon Inspector:</strong> Layanan keamanan otomatis untuk memindai kerentanan (vulnerability) pada EC2 dari CVE atau kesalahan konfigurasi jaringan.</li>
+  <li><strong>AWS Security Hub:</strong> Dashboard keamanan terpusat untuk mengumpulkan alert keamanan dan postur kepatuhan (compliance) dari Inspector, GuardDuty, Macie, dll.</li>
+  <li><strong>AWS Organizations:</strong> Layanan untuk mengelola banyak akun AWS secara terpusat dengan fitur Consolidated Billing dan Service Control Policy (SCP) untuk tata kelola (governance).</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">6. Auto Scaling &amp; Load Balancing</h4>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Auto Scaling Policies:</strong>
+    <ul class="list-circle pl-5 mt-1 space-y-1">
+      <li><em>Predictive Scaling:</em> Menggunakan machine learning untuk memprediksi traffic dan menambah server secara proaktif sebelum lonjakan terjadi.</li>
+      <li><em>Step/Simple Scaling:</em> Menambah server berdasarkan alert CloudWatch (misal CPU > 80%).</li>
+      <li><em>Scheduled Scaling:</em> Menambah server pada jadwal tertentu.</li>
+    </ul>
+  </li>
+  <li><strong>Elastic Load Balancing (ELB):</strong>
+    <ul class="list-circle pl-5 mt-1 space-y-1">
+      <li><em>Application Load Balancer (ALB):</em> Berjalan di Layer 7 (HTTP/HTTPS). Mendukung perutean berbasis path/routing dan integrasi dengan Lambda.</li>
+      <li><em>Network Load Balancer (NLB):</em> Berjalan di Layer 4 (TCP/UDP/TLS). Latensi sangat rendah dan mampu menangani jutaan request per detik.</li>
+      <li><em>Gateway Load Balancer (GWLB):</em> Untuk menyaring traffic melalui appliance virtual pihak ketiga (firewall, IDS/IPS).</li>
+    </ul>
+  </li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">7. Amazon Route 53 &amp; Aurora Serverless</h4>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground">
+  <li><strong>Amazon Route 53:</strong> Layanan DNS AWS yang andal. Mendukung pendaftaran domain (Domain Registration), pengelolaan zona host (Hosted Zone seperti A/CNAME/MX records), dan Health Check untuk memantau kesehatan server agar traffic dapat dialihkan jika server bermasalah.</li>
+  <li><strong>Amazon Aurora Serverless:</strong> Database relasional yang otomatis melakukan scale kapasitas database secara naik/turun berdasarkan penggunaan, serta dapat di-pause sepenuhnya saat tidak digunakan untuk menghemat biaya (cocok untuk testing/development).</li>
+</ul>`,
+        contentEn: `<h4 class="font-extrabold text-base mb-2">1. Amazon VPC (Virtual Private Cloud)</h4>
+<p class="text-muted-foreground mb-4">Amazon VPC lets you provision a logically isolated virtual network in the AWS cloud, acting as your own virtual data center.</p>
+<p class="font-bold text-sm mb-1">Core VPC Components:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>VPC:</strong> The primary network boundary where all resources run.</li>
+  <li><strong>Public Subnet:</strong> Subnet with direct internet access via an Internet Gateway (IGW). Used for web servers, load balancers, and bastion hosts.</li>
+  <li><strong>Private Subnet:</strong> Isolated subnet with no direct access from the internet. Used for databases, backend microservices, and internal app servers.</li>
+</ul>
+<p class="font-bold text-sm mb-1">Network Gateways & Flow Logs:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Internet Gateway (IGW):</strong> Provides two-way communication (inbound and outbound) between the VPC and the public internet.</li>
+  <li><strong>NAT Gateway:</strong> Allows instances in a private subnet to connect to the internet (outbound) for updates while preventing the internet from initiating connections (inbound) with them.</li>
+  <li><strong>NAT Instance vs NAT Gateway:</strong> NAT Gateway is highly recommended as it is a fully managed, highly available service by AWS that requires no maintenance or patching.</li>
+  <li><strong>VPC Flow Logs:</strong> Captures IP traffic information for network interfaces, invaluable for security audits and troubleshooting connectivity issues like timeouts.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">2. Security Group vs Network ACL</h4>
+<p class="text-muted-foreground mb-4">AWS provides two layers of firewalls to secure your network:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Security Group (SG):</strong> Firewall at the instance level (EC2). It is <strong>Stateful</strong> (if inbound is allowed, outbound response is automatically allowed). Supports ALLOW rules only.</li>
+  <li><strong>Network ACL (NACL):</strong> Firewall at the subnet level. It is <strong>Stateless</strong> (inbound and outbound rules must be configured separately). Supports both ALLOW and DENY rules and evaluates rules in numerical order. Ideal for blocking specific malicious IP addresses.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">3. AWS Network Connections</h4>
+<p class="text-muted-foreground mb-4">Methods to connect your VPCs with other networks:</p>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>VPC Peering:</strong> Direct point-to-point connection between two VPCs with ultra-low latency and low costs. Does not scale well for large numbers of VPCs.</li>
+  <li><strong>AWS Transit Gateway:</strong> A centralized network hub used to connect multiple VPCs and on-premises networks (highly scalable and simple).</li>
+  <li><strong>AWS PrivateLink:</strong> Securely connects VPCs to services privately without exposing traffic to the internet, supporting overlapping IP ranges.</li>
+  <li><strong>Site-to-Site VPN:</strong> Secure encrypted IPsec VPN connection between on-premises office networks and AWS over the public internet.</li>
+  <li><strong>AWS Direct Connect:</strong> Dedicated private physical connection from on-premises data centers to AWS, skipping the internet for higher bandwidth and stability.</li>
+  <li><strong>Transit Gateway Peering:</strong> Connects Transit Gateways across different AWS regions for multi-region configurations and disaster recovery.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">4. AWS Identity Center &amp; Amazon Cognito</h4>
+<p class="font-bold text-sm mb-1">AWS IAM Identity Center (Workforce Identity):</p>
+<p class="text-muted-foreground mb-2">Centralized Single Sign-On (SSO) service to manage employee access to multiple AWS accounts and corporate business applications (integrates with Active Directory).</p>
+<p class="font-bold text-sm mb-1">Amazon Cognito (Customer Identity):</p>
+<p class="text-muted-foreground mb-2">Provides user sign-up, sign-in, and authentication for end-users of mobile and web applications. Supports OAuth and social identity federation (Google, Facebook, Apple).</p>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">5. AWS Encryption and Security Services</h4>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>AWS KMS:</strong> Centralized encryption key management service used to encrypt data at rest across S3, EBS, RDS, and other AWS services.</li>
+  <li><strong>Amazon EBS Encryption:</strong> Disk-level volume encryption for EBS, automatically encrypting volumes, snapshots, and data-at-rest.</li>
+  <li><strong>Amazon Inspector:</strong> Automates security assessments to scan EC2 instances for software vulnerabilities (CVEs) and network exposures.</li>
+  <li><strong>AWS Security Hub:</strong> Centralized dashboard consolidating security findings and compliance posture from Inspector, GuardDuty, Macie, etc.</li>
+  <li><strong>AWS Organizations:</strong> Manages multiple AWS accounts centrally with consolidated billing and Service Control Policies (SCPs) for account governance.</li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">6. Auto Scaling &amp; Load Balancing</h4>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground mb-4">
+  <li><strong>Auto Scaling Policies:</strong>
+    <ul class="list-circle pl-5 mt-1 space-y-1">
+      <li><em>Predictive Scaling:</em> Uses machine learning to analyze historical patterns and scale instances proactively before traffic spikes occur.</li>
+      <li><em>Step/Simple Scaling:</em> Scales capacity in response to CloudWatch alarms (e.g. CPU > 80%).</li>
+      <li><em>Scheduled Scaling:</em> Scales capacity at specific pre-defined times.</li>
+    </ul>
+  </li>
+  <li><strong>Elastic Load Balancing (ELB):</strong>
+    <ul class="list-circle pl-5 mt-1 space-y-1">
+      <li><em>Application Load Balancer (ALB):</em> Operates at Layer 7 (HTTP/HTTPS). Supports path-based routing, host-based routing, and Lambda integration.</li>
+      <li><em>Network Load Balancer (NLB):</em> Operates at Layer 4 (TCP/UDP/TLS). Ultra-low latency, capable of scaling to handle millions of requests per second.</li>
+      <li><em>Gateway Load Balancer (GWLB):</em> Deploys and manages virtual third-party security appliances (firewalls, IDS/IPS).</li>
+    </ul>
+  </li>
+</ul>
+
+<hr class="border-border my-6">
+
+<h4 class="font-extrabold text-base mb-2">7. Amazon Route 53 &amp; Aurora Serverless</h4>
+<ul class="list-disc pl-5 space-y-2 text-muted-foreground">
+  <li><strong>Amazon Route 53:</strong> A highly available and scalable DNS service. Provides domain registration, hosted zones (A/CNAME/MX records), and health checks to monitor application endpoints and redirect traffic away from unhealthy servers.</li>
+  <li><strong>Amazon Aurora Serverless:</strong> Relational database that automatically scales database capacity up or down based on load, and can pause completely when inactive to save costs (ideal for testing/development).</li>
+</ul>`
+      },
+      'cloud-modul11-13': {
+        title: 'Modul 11–13 (AWS Architecture & Integration)',
+        content: `<h4 class="font-extrabold text-base mb-2">Modul 11–13: AWS Architecture & Integration</h4>
+<p class="text-muted-foreground">Materi untuk modul ini mencakup AWS CloudFormation, ElastiCache, CloudFront, Decoupling Architectures, SQS (Simple Queue Service), SNS (Simple Notification Service), dan Amazon MQ.</p>
+<p class="text-xs text-muted-foreground italic mt-4">Pilih bab lain atau kerjakan quiz untuk menguji pemahaman Anda.</p>`
+      },
+      'cloud-modul14-16': {
+        title: 'Modul 14–16 (AWS Serverless & DR)',
+        content: `<h4 class="font-extrabold text-base mb-2">Modul 14–16: AWS Serverless & Disaster Recovery</h4>
+<p class="text-muted-foreground">Materi untuk modul ini mencakup AWS Lambda, RDS Proxy, ECS (Elastic Container Service), API Gateway, Step Functions, Glue, EMR, Kinesis Data Streams, Data Firehose, Multi-AZ RDS, Redshift snapshots, dan Disaster Recovery Strategies (Backup & Restore, Pilot Light, Warm Standby, Multi-site Active).</p>
+<p class="text-xs text-muted-foreground italic mt-4">Pilih bab lain atau kerjakan quiz untuk menguji pemahaman Anda.</p>`
       }
     };
 
+    let currentMateriId = '';
+    let currentMateriLang = 'id'; // default language
+
     function openMateriModal(id) {
+      currentMateriId = id;
+      currentMateriLang = 'id'; // reset to Indonesian by default when opening
       const data = MATERI_DATA[id];
       if (!data) return;
       document.getElementById('materi-modal-title').textContent = data.title;
-      document.getElementById('materi-modal-body').innerHTML = data.content;
+      
+      const switcher = document.getElementById('lang-switcher');
+      if (switcher) {
+        if (data.contentEn) {
+          switcher.classList.remove('hidden');
+        } else {
+          switcher.classList.add('hidden');
+        }
+      }
+
+      updateMateriContent();
+
       const overlay = document.getElementById('materi-overlay');
       const modal   = document.getElementById('materi-modal');
       document.body.style.overflow = 'hidden';
@@ -2009,6 +2422,38 @@ Sisa: 90</div>`
       });
       resetSheet();
       if (window.lucide) lucide.createIcons();
+    }
+
+    function updateMateriContent() {
+      const data = MATERI_DATA[currentMateriId];
+      if (!data) return;
+
+      let content = '';
+      if (currentMateriLang === 'en' && data.contentEn) {
+        content = data.contentEn;
+      } else {
+        content = data.contentId || data.content || '';
+      }
+
+      document.getElementById('materi-modal-body').innerHTML = content;
+
+      // Update active state in switcher UI
+      const btnId = document.getElementById('btn-lang-id');
+      const btnEn = document.getElementById('btn-lang-en');
+      if (btnId && btnEn) {
+        if (currentMateriLang === 'id') {
+          btnId.className = 'px-3 py-1 text-xs font-bold rounded-lg transition-all bg-primary text-primary-foreground shadow-sm';
+          btnEn.className = 'px-3 py-1 text-xs font-bold rounded-lg transition-all text-muted-foreground';
+        } else {
+          btnId.className = 'px-3 py-1 text-xs font-bold rounded-lg transition-all text-muted-foreground';
+          btnEn.className = 'px-3 py-1 text-xs font-bold rounded-lg transition-all bg-primary text-primary-foreground shadow-sm';
+        }
+      }
+    }
+
+    function setMateriLanguage(lang) {
+      currentMateriLang = lang;
+      updateMateriContent();
     }
 
     function closeMateriModal() {
